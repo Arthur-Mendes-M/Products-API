@@ -7,11 +7,10 @@ server.use(express.json())
 server.use('/employees', router)
 
 server.get('/', (request, response) => {
-    console.log('Rota requisitada')
     response.status(200).send()
 })
 
 server.listen({
     host: '0.0.0.0',
-    port: 3030
+    port: process.env.PORT ?? 3030
 })
