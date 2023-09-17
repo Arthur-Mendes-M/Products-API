@@ -13,5 +13,5 @@ server.get('/', (request, response) => {
 
 server.listen({
     host: '0.0.0.0',
-    port: process.env.PORT ?? 3030
+    port: 3030
 })
