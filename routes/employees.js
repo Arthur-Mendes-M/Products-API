@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { DB } from '../models/database.js'
+import { DB } from '../models/Database.js'
 const router = Router()
 
 router.get('/', async (request, response) => {
