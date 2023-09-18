@@ -27,6 +27,17 @@ class Database {
             );
         `
     }
+
+    async updateEmployee(employeeId, newData) {
+        await sql`
+            UPDATE employees 
+                SET 
+                    name = ${newData.name},
+                    bithday = ${newData.birthday}
+                WHERE
+                    id = ${employeeId}
+        `
+    }
 }
 
 export const DB = new Database()

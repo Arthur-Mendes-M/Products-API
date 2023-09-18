@@ -16,4 +16,13 @@ router.post('/', async (request, response) => {
     response.status(201).send()
 })
 
+router.put('/:id', async (request, response) => {
+    const employeeId = request.params.id
+    const newData = request.body
+
+    await DB.updateEmployee(employeeId, newData)
+
+    response.status(200).send()
+})
+
 export default router
