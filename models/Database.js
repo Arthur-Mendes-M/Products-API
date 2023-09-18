@@ -33,7 +33,7 @@ class Database {
             UPDATE employees 
                 SET 
                     name = ${newData.name},
-                    bithday = ${newData.birthday}
+                    birthday = ${newData.birthday}
                 WHERE
                     id = ${employeeId}
         `
