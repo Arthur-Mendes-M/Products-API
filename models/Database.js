@@ -25,7 +25,7 @@ class Database {
                 ${name},
                 ${birthday}
             );
-        `.then((result) => console.log(`Deu certo. Status: ${result.statusText}`))
+        `.then((result) => console.log(`Deu certop. Status: ${result.statusText}`))
          .catch(e => console.log(e))
     }
 
