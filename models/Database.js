@@ -25,7 +25,8 @@ class Database {
                 ${name},
                 ${birthday}
             );
-        `.catch(e => console.log(e))
+        `.then((result) => console.log(`Deu certo. Status: ${result.statusText}`))
+         .catch(e => console.log(e))
     }
 
     async updateEmployee(employeeId, newData) {
