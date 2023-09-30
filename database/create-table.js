@@ -6,7 +6,7 @@ import { sql } from "./db.js";
 
 sql`
     CREATE TABLE IF NOT EXISTS employees (
-        id TEXT NOT NULL PRIMARY KEY,
+        id SERIAL PRIMARY KEY ,
         name VARCHAR NOT NULL ,
         birthday VARCHAR(10) NOT NULL ,
         age INT ,
