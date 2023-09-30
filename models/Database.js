@@ -47,7 +47,8 @@ class Database {
 
         await sql`
             INSERT INTO employees (
-                id, name, birthday
+                id, name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis, employementCard, tel, cel, email, 
+                password, cep, address, number, neighborhood, city, state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency
             ) VALUES (
                 ${employeeId},
                 ${name},
@@ -116,7 +117,7 @@ class Database {
                     hiring = ${newData.hiring},
                     benefits = ${newData.benefits},
                     bankAccount = ${newData.bankAccount},
-                    bank = ${newData.age},
+                    bank = ${newData.bank},
                     agency = ${newData.agency}
                 WHERE
                     id = ${employeeId}

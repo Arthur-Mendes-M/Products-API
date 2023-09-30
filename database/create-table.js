@@ -37,7 +37,27 @@ sql`
         bank VARCHAR ,
         agency VARCHAR 
 
+    ),
+    CREATE TABLE IF NOT EXISTS  register(
+        id SERIAL PRIMARY KEY ,
+        name VARCHAR ,
+        cnpj VARCHAR ,
+        stateRegistration VARCHAR ,
+        openingDate VARCHAR ,
+        corporateName VARCHAR ,
+        cep VARCHAR ,
+        address VARCHAR ,
+        number VARCHAR ,
+        neighborhood VARCHAR ,
+        city VARCHAR ,
+        state VARCHAR ,
+        email VARCHAR ,
+        confirmEmail VARCHAR ,
+        password VARCHAR ,
+        confirmPassword VARCHAR ,
+        finalCode VARCHAR 
+
     )
-`.then(() => console.log('Table has been created'))
+`.then(() => console.log('Tables has been created'))
 
 // console.log(sql)
