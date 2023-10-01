@@ -12,7 +12,7 @@ router.post('/', async (request, response) => {
     let employee = request.body
     employee = {
         ...employee,
-        benefits: benefits.join(", ")
+        benefits: employee.benefits.join(", ")
     }
 
     await DB.createEmployee(employee)
