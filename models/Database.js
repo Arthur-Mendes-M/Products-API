@@ -82,7 +82,7 @@ class Database {
                 ${bank},
                 ${agency}
             );
-        `
+        `.then(() => console.log('Deu certo')).catch((error) => console.log(error))
     }
 
     async updateEmployee(employeeId, newData) {
