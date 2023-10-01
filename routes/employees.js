@@ -9,7 +9,11 @@ router.get('/', async (request, response) => {
 })
 
 router.post('/', async (request, response) => {
-    const employee = request.body
+    let employee = request.body
+    employee = {
+        ...employee,
+        benefits: benefits.join(", ")
+    }
 
     await DB.createEmployee(employee)
 
