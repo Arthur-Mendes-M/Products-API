@@ -11,76 +11,24 @@ class Database {
     }
 
     async createEmployee(employee) {
-        // const employeeId = randomUUID()
         const {
-            name,
-            birthday,
-            age,
-            genderIdentity,
-            pronoun,
-            motherName,
-            fatherName,
-            rg,
-            cpf,
-            pis,
-            employementCard,
-            tel,
-            cel,
-            email,
-            password,
-            cep,
-            address,
-            number,
-            neighborhood,
-            city,
-            state,
-            office,
-            sector,
-            contract,
-            grossSalary,
-            hiring,
-            benefits,
-            bankAccount,
-            bank,
-            agency
-        } = employee
-
+          name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
+          employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
+          state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency,
+          image_path
+        } = employee;
+      
         await sql`
-            INSERT INTO employees (
-                name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis, employementCard, tel, cel, email, 
-                password, cep, address, number, neighborhood, city, state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency
-            ) VALUES (
-                ${name},
-                ${birthday},
-                ${age},
-                ${genderIdentity},
-                ${pronoun},
-                ${motherName},
-                ${fatherName},
-                ${rg},
-                ${cpf},
-                ${pis},
-                ${employementCard},
-                ${tel},
-                ${cel},
-                ${email},
-                ${password},
-                ${cep},
-                ${address},
-                ${number},
-                ${neighborhood},
-                ${city},
-                ${state},
-                ${office},
-                ${sector},
-                ${contract},
-                ${grossSalary},
-                ${hiring},
-                ${benefits},
-                ${bankAccount},
-                ${bank},
-                ${agency}
-            );
+          INSERT INTO employees (
+            name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
+            employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
+            state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency, image_path
+          ) VALUES (
+            ${name}, ${birthday}, ${age}, ${genderIdentity}, ${pronoun}, ${motherName}, ${fatherName}, ${rg},
+            ${cpf}, ${pis}, ${employementCard}, ${tel}, ${cel}, ${email}, ${password}, ${cep}, ${address},
+            ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${grossSalary},
+            ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${image_path}
+          );
         `.then(() => console.log('Deu certo')).catch((error) => console.log(error))
     }
 
