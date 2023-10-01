@@ -11,7 +11,7 @@ class Database {
     }
 
     async createEmployee(employee) {
-        const employeeId = randomUUID()
+        // const employeeId = randomUUID()
         const {
             name,
             birthday,
@@ -47,10 +47,9 @@ class Database {
 
         await sql`
             INSERT INTO employees (
-                id, name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis, employementCard, tel, cel, email, 
+                name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis, employementCard, tel, cel, email, 
                 password, cep, address, number, neighborhood, city, state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency
             ) VALUES (
-                ${employeeId},
                 ${name},
                 ${birthday},
                 ${age},
