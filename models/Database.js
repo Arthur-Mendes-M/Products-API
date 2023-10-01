@@ -15,19 +15,19 @@ class Database {
           name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
           employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
           state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency,
-          image_path
+          employeePhoto
         } = employee;
       
         await sql`
           INSERT INTO employees (
             name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
             employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
-            state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency, image_path
+            state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhoto
           ) VALUES (
             ${name}, ${birthday}, ${age}, ${genderIdentity}, ${pronoun}, ${motherName}, ${fatherName}, ${rg},
             ${cpf}, ${pis}, ${employementCard}, ${tel}, ${cel}, ${email}, ${password}, ${cep}, ${address},
             ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${grossSalary},
-            ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${image_path}
+            ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhoto}
           );
         `.then(() => console.log('Deu certo')).catch((error) => console.log(error))
     }
@@ -65,7 +65,9 @@ class Database {
                     benefits = ${newData.benefits},
                     bankAccount = ${newData.bankAccount},
                     bank = ${newData.bank},
-                    agency = ${newData.agency}
+                    agency = ${newData.agency},
+                    employeePhoto = ${newData.employeePhoto}   
+
                 WHERE
                     id = ${employeeId}
         `

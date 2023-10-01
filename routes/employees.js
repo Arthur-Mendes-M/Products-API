@@ -33,7 +33,7 @@ router.post('/upload', upload.single('image'), async (req, res) => {
     }
 
     // Adicione o caminho da imagem ao objeto employee
-    employee.image_path = imagePath;
+    employee.employeePhoto = imagePath;
 
     // Salve o funcionário no banco de dados
     await DB.createEmployee(employee);

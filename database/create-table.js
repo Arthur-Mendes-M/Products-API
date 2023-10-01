@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS employees (
     bankAccount VARCHAR,
     bank VARCHAR,
     agency VARCHAR,
-    image_path VARCHAR  
+    employeePhoto VARCHAR  
   )
 `.then(() => console.log('Tables has been created'))
 
