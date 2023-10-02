@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Rota para fazer upload de uma imagem e criar um funcionário
-router.post('/upload', upload.single('image'), async (req, res) => {
+router.post('/', upload.single('image'), async (req, res) => {
   try {
     // O arquivo da imagem foi carregado com sucesso.
     // O caminho da imagem está em req.file.path
