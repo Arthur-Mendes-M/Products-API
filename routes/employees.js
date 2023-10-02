@@ -63,13 +63,13 @@ router.post('/', upload.single('image'), async (req, res) => {
     let employee = req.body;
 
     // Adicione o campo "benefits" ao objeto employee
-    if (employee.benefits && Array.isArray(employee.benefits)) {
+    // if (employee.benefits && Array.isArray(employee.benefits)) {
       // Se "benefits" for uma matriz, una-a em uma string
       employee.benefits = employee.benefits.join(', ');
-    }
+    // }
 
     // Adicione o caminho da imagem ao objeto employee
-    employee.employeePhoto = imagePath;
+    // employee.employeePhoto = imagePath;
 
     // Salve o funcionário no banco de dados
     await DB.createEmployee(employee);
