@@ -18,10 +18,13 @@ const upload = multer({ storage: storage });
 
 // Rota para fazer upload de uma imagem e criar um funcionário
 router.post('/', upload.single('image'), async (req, res) => {
+  console.log(req)
   try {
     // O arquivo da imagem foi carregado com sucesso.
     // O caminho da imagem está em req.file.path
     const imagePath = req.file.path;
+    console.log(req)
+    console.log(req.file)
 
     // Obtenha outros dados do corpo da solicitação
     let employee = req.body;
