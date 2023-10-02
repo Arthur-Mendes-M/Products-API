@@ -17,14 +17,47 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Rota para fazer upload de uma imagem e criar um funcionário
+// router.post('/', upload.single('image'), async (req, res) => {
+//   try {
+//     // O arquivo da imagem foi carregado com sucesso.
+//     // O caminho da imagem está em req.file.path
+//     const imagePath = req.file.path;
+//     console.log(req)
+//     console.log(req.file)
+
+//     // Obtenha outros dados do corpo da solicitação
+//     let employee = req.body;
+
+//     // Adicione o campo "benefits" ao objeto employee
+//     if (employee.benefits && Array.isArray(employee.benefits)) {
+//       // Se "benefits" for uma matriz, una-a em uma string
+//       employee.benefits = employee.benefits.join(', ');
+//     }
+
+//     // Adicione o caminho da imagem ao objeto employee
+//     employee.employeePhoto = imagePath;
+
+//     // Salve o funcionário no banco de dados
+//     await DB.createEmployee(employee);
+
+//     res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
+//   }
+// });
+
 router.post('/', upload.single('image'), async (req, res) => {
-  console.log(req)
   try {
     // O arquivo da imagem foi carregado com sucesso.
     // O caminho da imagem está em req.file.path
     const imagePath = req.file.path;
-    console.log(req)
+    console.log("-------------------------")
+    console.log("-------------------------")
     console.log(req.file)
+    console.log("-------------------------")
+    console.log("-------------------------")
+    console.log(req.body.employeePhoto)
 
     // Obtenha outros dados do corpo da solicitação
     let employee = req.body;
