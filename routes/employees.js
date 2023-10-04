@@ -49,32 +49,25 @@ const upload = multer({ storage: storage });
 
 router.post('/', upload.single('image'), async (req, res) => {
   try {
-    // O arquivo da imagem foi carregado com sucesso.
-    // O caminho da imagem está em req.file.path
-    const imagePath = req.file.path;
-    console.log("-------------------------")
-    console.log("-------------------------")
-    console.log(req.file)
-    console.log("-------------------------")
-    console.log("-------------------------")
-    console.log(req.body.employeePhoto)
 
     // Obtenha outros dados do corpo da solicitação
     let employee = req.body;
+    let employeePhoto = req.file;
 
-    // Adicione o campo "benefits" ao objeto employee
-    // if (employee.benefits && Array.isArray(employee.benefits)) {
-      // Se "benefits" for uma matriz, una-a em uma string
-      employee.benefits = employee.benefits.join(', ');
-    // }
 
-    // Adicione o caminho da imagem ao objeto employee
-    // employee.employeePhoto = imagePath;
+    employee.benefits = employee.benefits.join(', ');
 
     // Salve o funcionário no banco de dados
-    await DB.createEmployee(employee);
+    // await DB.createEmployee(employee);
 
-    res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
+    console.log('----------------')
+    console.log(employee)
+    console.log('----------------')
+    console.log(employeePhoto)
+    console.log('----------------')
+
+    // res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
+    res.status(200).json({ message: `Imagem: ${JSON.stringify(employeePhoto)}` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
