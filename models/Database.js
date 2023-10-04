@@ -14,7 +14,7 @@ class Database {
         const {
           name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
           employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
-          state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency,
+          state, office, sector, contract, journeyInit,  journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency,
           employeePhoto
         } = employee;
       
@@ -22,11 +22,11 @@ class Database {
           INSERT INTO employees (
             name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
             employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
-            state, office, sector, contract, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhoto
+            state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhoto
           ) VALUES (
             ${name}, ${birthday}, ${age}, ${genderIdentity}, ${pronoun}, ${motherName}, ${fatherName}, ${rg},
             ${cpf}, ${pis}, ${employementCard}, ${tel}, ${cel}, ${email}, ${password}, ${cep}, ${address},
-            ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${grossSalary},
+            ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${journeyInit}, ${journeyEnd}, ${grossSalary},
             ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhoto}
           );
         `.then(() => console.log('Deu certo')).catch((error) => console.log(error))
@@ -60,6 +60,8 @@ class Database {
                     office = ${newData.office},
                     sector = ${newData.sector},
                     contract = ${newData.contract},
+                    journeyInit = ${newData.journeyInit},
+                    journeyEnd = ${newData.journeyEnd},
                     grossSalary = ${newData.grossSalary},
                     hiring = ${newData.hiring},
                     benefits = ${newData.benefits},

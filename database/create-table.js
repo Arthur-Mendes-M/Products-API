@@ -4,16 +4,14 @@ import { sql } from "./db.js";
 //     DROP TABLE employees
 // `.then(() => console.log('Table has been deleted'))
 
-
 // sql`
 //     select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS 
 //     where TABLE_NAME = 'employees'
 // `.then((data) => console.log(data))
 
-
 sql`
 CREATE TABLE IF NOT EXISTS employees (
-    id INT PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     name VARCHAR,
     birthday VARCHAR(10),
     age VARCHAR,
@@ -38,6 +36,8 @@ CREATE TABLE IF NOT EXISTS employees (
     office VARCHAR,
     sector VARCHAR,
     contract VARCHAR,
+    journeyInit VARCHAR,
+    journeyEnd VARCHAR,
     grossSalary VARCHAR,
     hiring VARCHAR,
     benefits VARCHAR,
@@ -47,5 +47,3 @@ CREATE TABLE IF NOT EXISTS employees (
     employeePhoto VARCHAR  
   )
 `.then(() => console.log('Tables has been created'))
-
-console.log(sql)
