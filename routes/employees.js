@@ -74,6 +74,8 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
+router.use('/uploads', express.static('./uploads'))
+
 // Restante das rotas para listar e atualizar funcionários
 router.get('/', async (req, res) => {
   const employees = await DB.listEmployees();
