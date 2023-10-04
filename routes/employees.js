@@ -49,25 +49,21 @@ const upload = multer({ storage: storage });
 
 router.post('/', upload.single('image'), async (req, res) => {
   try {
-
     // Obtenha outros dados do corpo da solicitação
-    let employee = req.body;
-    let employeePhoto = req.file;
+    let compleEmployee = {
+        ...req.body,
+        employeePhoto: req.file.path
+    }
 
+    compleEmployee.benefits = req.body.benefits.join(', ');
 
-    employee.benefits = employee.benefits.join(', ');
+    console.log(compleEmployee)
 
     // Salve o funcionário no banco de dados
-    // await DB.createEmployee(employee);
-
-    console.log('----------------')
-    console.log(employee)
-    console.log('----------------')
-    console.log(employeePhoto)
-    console.log('----------------')
+    await DB.createEmployee(compleEmployee);
 
     // res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
-    res.status(200).json({ message: `Imagem: ${JSON.stringify(employeePhoto)}` });
+    res.status(200).json({ message: `Funcionário registrado com sucesso!` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
