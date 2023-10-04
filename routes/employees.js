@@ -52,7 +52,7 @@ router.post('/', upload.single('image'), async (req, res) => {
     // Obtenha outros dados do corpo da solicitação
     let compleEmployee = {
         ...req.body,
-        employeePhoto: req.file.path
+        employeePhoto: req.file.filename
     }
 
     compleEmployee.benefits = req.body.benefits.join(', ');
