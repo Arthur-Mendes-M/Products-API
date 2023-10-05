@@ -1,7 +1,6 @@
 import express from 'express';
 import { DB } from '../models/Database.js'; // Certifique-se de que o caminho esteja correto
 import multer from 'multer';
-import path from 'path'
 
 const router = express.Router();
 
@@ -74,7 +73,7 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
-// router.use('/uploads', express.static('./uploads'))
+router.use('/uploads', express.static('./uploads'))
 // router.get('/photo/:employeePhotoName', (req, res) => {
 //   const photoName = req.params.employeePhotoName
 //   const completePath = path.join('uploads', photoName)
@@ -82,18 +81,18 @@ router.post('/', upload.single('image'), async (req, res) => {
 //   res.sendFile(completePath)
 // })
 
-router.get('/photo/:employeePhotoName', (req, res) => {
-  const photoName = req.params.employeePhotoName;
+// router.get('/photo/:employeePhotoName', (req, res) => {
+//   const photoName = req.params.employeePhotoName;
 
-  // Obtenha o caminho absoluto para o diretório de uploads
-  const uploadDir = path.join(process.cwd(), '..', 'uploads'); // '..' para voltar um nível
+//   // Obtenha o caminho absoluto para o diretório de uploads
+//   const uploadDir = path.join(process.cwd(), '..', 'uploads'); // '..' para voltar um nível
 
-  // Combine o caminho absoluto com o nome do arquivo
-  const completePath = path.join(uploadDir, photoName);
+//   // Combine o caminho absoluto com o nome do arquivo
+//   const completePath = path.join(uploadDir, photoName);
 
-  // Envie o arquivo
-  res.sendFile(completePath, { root: '/' });
-});
+//   // Envie o arquivo
+//   res.sendFile(completePath, { root: '/' });
+// });
 
 
 // Restante das rotas para listar e atualizar funcionários
