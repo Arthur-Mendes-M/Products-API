@@ -1,12 +1,5 @@
 import { sql } from "./db.js";
 
-sql`
-    DELETE FROM
-    employees
-    WHERE
-    id >= 1
-`.then(() => console.log('Employees was deleted'))
-
 // sql`
 //     DROP TABLE employees
 // `.then(() => console.log('Table has been deleted'))

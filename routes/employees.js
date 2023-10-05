@@ -15,37 +15,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-// Rota para fazer upload de uma imagem e criar um funcionário
-// router.post('/', upload.single('image'), async (req, res) => {
-//   try {
-//     // O arquivo da imagem foi carregado com sucesso.
-//     // O caminho da imagem está em req.file.path
-//     const imagePath = req.file.path;
-//     console.log(req)
-//     console.log(req.file)
-
-//     // Obtenha outros dados do corpo da solicitação
-//     let employee = req.body;
-
-//     // Adicione o campo "benefits" ao objeto employee
-//     if (employee.benefits && Array.isArray(employee.benefits)) {
-//       // Se "benefits" for uma matriz, una-a em uma string
-//       employee.benefits = employee.benefits.join(', ');
-//     }
-
-//     // Adicione o caminho da imagem ao objeto employee
-//     employee.employeePhoto = imagePath;
-
-//     // Salve o funcionário no banco de dados
-//     await DB.createEmployee(employee);
-
-//     res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
-//   }
-// });
+router.use('/uploads', express.static('./uploads'))
 
 router.post('/', upload.single('image'), async (req, res) => {
   try {
@@ -66,36 +36,13 @@ router.post('/', upload.single('image'), async (req, res) => {
     await DB.createEmployee(compleEmployee);
 
     // res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
-    res.status(200).json({ message: `Funcionário registrado com sucesso!` });
+    res.status(201).json({ message: `Funcionário registrado com sucesso!` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
   }
 });
 
-router.use('/uploads', express.static('./uploads'))
-// router.get('/photo/:employeePhotoName', (req, res) => {
-//   const photoName = req.params.employeePhotoName
-//   const completePath = path.join('uploads', photoName)
-
-//   res.sendFile(completePath)
-// })
-
-// router.get('/photo/:employeePhotoName', (req, res) => {
-//   const photoName = req.params.employeePhotoName;
-
-//   // Obtenha o caminho absoluto para o diretório de uploads
-//   const uploadDir = path.join(process.cwd(), '..', 'uploads'); // '..' para voltar um nível
-
-//   // Combine o caminho absoluto com o nome do arquivo
-//   const completePath = path.join(uploadDir, photoName);
-
-//   // Envie o arquivo
-//   res.sendFile(completePath, { root: '/' });
-// });
-
-
-// Restante das rotas para listar e atualizar funcionários
 router.get('/', async (req, res) => {
   const employees = await DB.listEmployees();
 
@@ -114,7 +61,7 @@ router.put('/:id', async (req, res) => {
 
   await DB.updateEmployee(employeeId, newData);
 
-  res.status(200).json({ message: 'Funcionário atualizado com sucesso' });
+  res.status(204).json({ message: 'Funcionário atualizado com sucesso' });
 });
 
 export default router;
