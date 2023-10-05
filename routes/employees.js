@@ -1,6 +1,7 @@
 import express from 'express';
 import { DB } from '../models/Database.js'; // Certifique-se de que o caminho esteja correto
 import multer from 'multer';
+import path from 'path'
 
 const router = express.Router();
 
@@ -76,7 +77,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 // router.use('/uploads', express.static('./uploads'))
 router.get('/photo/:employeePhotoName', (req, res) => {
   const photoName = req.params.employeePhotoName
-  const completePath = `./uploads/${photoName}`
+  const completePath = path.join(__dirname, 'uploads', photoName)
 
   res.sendFile(completePath)
 })
