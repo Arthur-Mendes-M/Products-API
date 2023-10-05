@@ -77,6 +77,12 @@ router.get('/', async (req, res) => {
   res.status(200).json(employees);
 });
 
+router.get('/:id', async (req, res) => {
+  const employee = await BD.getEmployee(req.params.id);
+
+  res.status(200).json(employee)
+})
+
 router.put('/:id', async (req, res) => {
   const employeeId = req.params.id;
   const newData = req.body;
