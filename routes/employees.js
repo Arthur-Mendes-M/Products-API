@@ -55,7 +55,8 @@ router.post('/', upload.single('image'), async (req, res) => {
         employeePhoto: req.file.filename
     }
 
-    compleEmployee.benefits = req.body.benefits.join(', ');
+    const benefits = req.body?.benefits
+    compleEmployee.benefits = benefits.join(', ') ?? '';
 
     // Salve o funcionário no banco de dados
     await DB.createEmployee(compleEmployee);
