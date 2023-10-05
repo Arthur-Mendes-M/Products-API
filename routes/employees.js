@@ -77,7 +77,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 // router.use('/uploads', express.static('./uploads'))
 router.get('/photo/:employeePhotoName', (req, res) => {
   const photoName = req.params.employeePhotoName
-  const completePath = path.join(__dirname, 'uploads', photoName)
+  const completePath = path.join(path.dirname, 'uploads', photoName)
 
   res.sendFile(completePath)
 })
