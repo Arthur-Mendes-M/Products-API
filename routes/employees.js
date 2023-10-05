@@ -73,7 +73,13 @@ router.post('/', upload.single('image'), async (req, res) => {
   }
 });
 
-router.use('/uploads', express.static('./uploads'))
+// router.use('/uploads', express.static('./uploads'))
+router.get('/photo/:employeePhotoName', (req, res) => {
+  const photoName = req.params.employeePhotoName
+  const completePath = `./uploads/${photoName}`
+
+  res.sendFile(completePath)
+})
 
 // Restante das rotas para listar e atualizar funcionários
 router.get('/', async (req, res) => {
