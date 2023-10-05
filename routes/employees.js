@@ -75,12 +75,26 @@ router.post('/', upload.single('image'), async (req, res) => {
 });
 
 // router.use('/uploads', express.static('./uploads'))
-router.get('/photo/:employeePhotoName', (req, res) => {
-  const photoName = req.params.employeePhotoName
-  const completePath = path.join('uploads', photoName)
+// router.get('/photo/:employeePhotoName', (req, res) => {
+//   const photoName = req.params.employeePhotoName
+//   const completePath = path.join('uploads', photoName)
 
-  res.sendFile(completePath)
-})
+//   res.sendFile(completePath)
+// })
+
+router.get('/photo/:employeePhotoName', (req, res) => {
+  const photoName = req.params.employeePhotoName;
+
+  // Obtenha o caminho absoluto para o diretório de uploads
+  const uploadDir = path.join(__dirname, '..', 'uploads'); // '..' para voltar um nível
+
+  // Combine o caminho absoluto com o nome do arquivo
+  const completePath = path.join(uploadDir, photoName);
+
+  // Envie o arquivo
+  res.sendFile(completePath);
+});
+
 
 // Restante das rotas para listar e atualizar funcionários
 router.get('/', async (req, res) => {
