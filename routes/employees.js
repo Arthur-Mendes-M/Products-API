@@ -86,7 +86,7 @@ router.get('/photo/:employeePhotoName', (req, res) => {
   const photoName = req.params.employeePhotoName;
 
   // Obtenha o caminho absoluto para o diretório de uploads
-  const uploadDir = path.join(__dirname, '..', 'uploads'); // '..' para voltar um nível
+  const uploadDir = path.join(process.cwd(), 'uploads'); // '..' para voltar um nível
 
   // Combine o caminho absoluto com o nome do arquivo
   const completePath = path.join(uploadDir, photoName);
