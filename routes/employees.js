@@ -92,7 +92,7 @@ router.get('/photo/:employeePhotoName', (req, res) => {
   const completePath = path.join(uploadDir, photoName);
 
   // Envie o arquivo
-  res.sendFile(completePath);
+  res.sendFile(completePath, { root: '/' });
 });
 
 
