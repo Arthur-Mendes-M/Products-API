@@ -5,35 +5,45 @@ import multer from 'multer';
 const router = express.Router();
 
 // Configuração do armazenamento de arquivos com Multer
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/'); // Diretório onde as imagens serão armazenadas
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname); // Nome do arquivo no servidor
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, 'uploads/'); // Diretório onde as imagens serão armazenadas
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + '-' + file.originalname); // Nome do arquivo no servidor
+//   },
+// });
 
-const upload = multer({ storage: storage });
-router.use('/uploads', express.static('./uploads'))
+// const upload = multer({ storage: storage });
+
+
+const storage = multer.memoryStorage()
+const upload = multer({ storage })
+
+// router.use('/uploads', express.static('./uploads'))
 
 router.post('/', upload.single('image'), async (req, res) => {
   try {
     // Obtenha outros dados do corpo da solicitação
-    let compleEmployee = {
-        ...req.body,
-        employeePhoto: req.file.filename
+    const { originalname, buffer } = req.file;
+
+    let completeEmployee = {
+      ...req.body,
+      employeePhotoName: `${Date.now()}-${originalname}`,
+      employeePhoto: buffer
     }
 
     const benefits = req.body?.benefits
     if(Array.isArray(benefits)) {
-      compleEmployee.benefits = benefits.join(', ')
+      completeEmployee.benefits = benefits.join(', ')
     } else {
-      compleEmployee.benefits = benefits ?? ''
+      completeEmployee.benefits = benefits ?? ''
     }
 
+    console.log(completeEmployee)
+    console.log("-------------------")
     // Salve o funcionário no banco de dados
-    await DB.createEmployee(compleEmployee);
+    await DB.createEmployee(completeEmployee);
 
     // res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
     res.status(201).json({ message: `Funcionário registrado com sucesso!` });
@@ -42,6 +52,47 @@ router.post('/', upload.single('image'), async (req, res) => {
     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
   }
 });
+
+router.get('/photo/:photoName', async (req, res) => {
+  const employeePhotoName = req.params.photoName
+  
+  const photo = await DB.getEmployeePhoto(employeePhotoName)
+  
+  console.log("-------------------")
+  console.log(photo)
+  console.log("-------------------")
+
+  res.setHeader('Content-Type', 'image/jpeg')
+  res.end(photo)
+})
+
+
+
+// router.post('/', upload.single('image'), async (req, res) => {
+//   try {
+//     // Obtenha outros dados do corpo da solicitação
+//     let compleEmployee = {
+//         ...req.body,
+//         employeePhoto: req.file.filename
+//     }
+
+//     const benefits = req.body?.benefits
+//     if(Array.isArray(benefits)) {
+//       compleEmployee.benefits = benefits.join(', ')
+//     } else {
+//       compleEmployee.benefits = benefits ?? ''
+//     }
+
+//     // Salve o funcionário no banco de dados
+//     await DB.createEmployee(compleEmployee);
+
+//     // res.status(200).json({ message: 'Imagem carregada e registro de funcionário criado com sucesso' });
+//     res.status(201).json({ message: `Funcionário registrado com sucesso!` });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
+//   }
+// });
 
 router.get('/', async (req, res) => {
   const employees = await DB.listEmployees();

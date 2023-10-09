@@ -23,7 +23,7 @@ class Database {
         name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit,  journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency,
-        employeePhoto
+        employeePhotoName, employeePhoto
       } = employee;
     
       await sql`
@@ -35,13 +35,21 @@ class Database {
           ${name}, ${birthday}, ${age}, ${genderIdentity}, ${pronoun}, ${motherName}, ${fatherName}, ${rg},
           ${cpf}, ${pis}, ${employementCard}, ${tel}, ${cel}, ${email}, ${password}, ${cep}, ${address},
           ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${journeyInit}, ${journeyEnd}, ${grossSalary},
-          ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhoto}
+          ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhotoName}, ${employeePhoto}
         );
       `.then(() => console.log('Deu certo')).catch((error) => console.log(error))
     }
 
+    async getEmployeePhoto(employeePhotoName) {
+      const employeePhoto = await sql`
+        SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
+      `
+
+      return employeePhoto
+    }
+
     async updateEmployee(employeeId, newData) {
-      await sql`
+       await sql`
         UPDATE employees 
           SET 
             name = ${newData.name},

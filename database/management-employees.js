@@ -44,6 +44,7 @@ import { sql } from "./db.js";
 //     bankAccount VARCHAR,
 //     bank VARCHAR,
 //     agency VARCHAR,
-//     employeePhoto VARCHAR  
+//     employeePhotoName VARCHAR,
+//     employeePhoto BYTEA
 //   )
 // `.then(() => console.log('Tables has been created'))
