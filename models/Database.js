@@ -30,7 +30,7 @@ class Database {
         INSERT INTO employees (
           name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
           employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
-          state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhoto
+          state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName, employeePhoto
         ) VALUES (
           ${name}, ${birthday}, ${age}, ${genderIdentity}, ${pronoun}, ${motherName}, ${fatherName}, ${rg},
           ${cpf}, ${pis}, ${employementCard}, ${tel}, ${cel}, ${email}, ${password}, ${cep}, ${address},
