@@ -59,7 +59,10 @@ router.get('/photo/:photoName', async (req, res) => {
   const photo = await DB.getEmployeePhoto(employeePhotoName)
 
   res.setHeader('Content-Type', 'image/jpeg')
-  res.end(photo)
+
+  const photoBaffer = Buffer.from(photo, 'base64')
+
+  res.end(photoBaffer)
 })
 
 
