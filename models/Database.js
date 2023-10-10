@@ -44,7 +44,9 @@ class Database {
       const result = await sql`
         SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
       `
-      return result
+      const base64Image = result.toString('base64')
+      
+      return `data:image/jpeg;base64,${base64Image}`
     }
 
     async updateEmployee(employeeId, newData) {

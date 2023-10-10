@@ -58,14 +58,9 @@ router.get('/photo/:photoName', async (req, res) => {
   
   const photo = await DB.getEmployeePhoto(employeePhotoName)
 
-  console.log("-------------------")
-  console.log(photo)
-  console.log("-------------------")
-  console.log(photo.toString('base64'))
-  console.log("-------------------")
-
-  res.setHeader('Content-Type', 'image/jpeg')
-  res.end(photo)
+  // res.setHeader('Content-Type', 'image/jpeg')
+  // res.end(photo)
+  res.redirect(photo)
 })
 
 
