@@ -58,7 +58,7 @@ router.get('/photo/:photoName', async (req, res) => {
   
   const photo = await DB.getEmployeePhoto(employeePhotoName)
 
-  res.setHeader('Content-Type', 'image/*')
+  res.setHeader('Content-Type', 'image/jpeg')
   // res.send(photo)
 
   // Configurar o cabeçalho Content-Disposition para exibir a imagem no navegador
