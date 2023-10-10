@@ -41,11 +41,12 @@ class Database {
     }
 
     async getEmployeePhoto(employeePhotoName) {
-      const employeePhoto = await sql`
+      const result = await sql`
         SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
       `
-      console.log(employeePhoto[0].employeePhotoName)
-      return employeePhoto[0].employeePhotoName.toString('base64')
+      console.log(result[0].employeePhoto)
+      console.log(result.employeePhoto)
+      return result[0].employeePhoto.toString('base64')
     }
 
     async updateEmployee(employeeId, newData) {
