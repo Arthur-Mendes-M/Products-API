@@ -44,8 +44,9 @@ class Database {
       const employeePhoto = await sql`
         SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
       `
-
-      return employeePhoto
+      console.log(employeePhoto)
+      console.log(employeePhoto[0])
+      return employeePhoto[0]
     }
 
     async updateEmployee(employeeId, newData) {
