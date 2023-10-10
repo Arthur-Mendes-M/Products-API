@@ -61,8 +61,12 @@ router.get('/photo/:photoName', async (req, res) => {
   res.setHeader('Content-Type', 'image/jpeg')
   // res.send(photo)
 
+  console.log(photo)
+  console.log('--------------')
+  console.log(Buffer.from(photo, 'base64'))
+
   // Enviar a imagem como resposta
-  res.end(Buffer.from(photo, 'base64'));
+  res.end(photo);
 })
 
 
