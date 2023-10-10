@@ -48,3 +48,4 @@ import { sql } from "./db.js";
 //     employeePhoto BYTEA
 //   )
 // `.then(() => console.log('Tables has been created'))
+

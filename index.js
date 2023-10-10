@@ -4,6 +4,8 @@ import multer from 'multer';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import router from './routes/employees.js';
+import registersRouter  from './routes/registers.js'
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +28,7 @@ const upload = multer({ storage: storage });
 
 server.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 server.use('/employees', router);
+server.use('/registers', registersRouter );
 
 server.get('/', (request, response) => {
   response.status(200).send();

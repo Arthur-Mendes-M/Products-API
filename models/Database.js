@@ -2,7 +2,9 @@ import { sql } from "../database/db.js";
 import {randomUUID} from 'crypto'
 
 class Database {
-    async listEmployees() {
+  //Employee
+  
+  async listEmployees() {
       const results = await sql`
         SELECT * FROM employees
       `
@@ -90,6 +92,94 @@ class Database {
             id = ${employeeId}
       `
     }
+
+    //Register
+
+    async listRegister() {
+      const results = await sql`
+          SELECT * FROM registers
+      `
+
+      return results
+  }
+
+    async createRegister(registers) {
+        const registerId = randomUUID()
+        const {
+            name,
+            cnpj,
+            stateRegistration,
+            openingDate,
+            corporateName,
+            cep,
+            address,
+            number,
+            neighborhood,
+            city,
+            state,
+            email,
+            confirmEmail,
+            password,
+            confirmPassword,
+            finalCode    
+
+        } = registers
+
+        await sql`
+            INSERT INTO registers (
+                id,  name, cnpj, stateRegistration, openingDate, corporateName, cep, address, number,
+                neighborhood, city, state, email, confirmEmail, password, confirmPassword, finalCode    
+            ) VALUES (
+                ${name},
+                ${cnpj},
+                ${stateRegistration},
+                ${openingDate},
+                ${corporateName},
+                ${cep},
+                ${address},
+                ${number},
+                ${neighborhood},
+                ${city},
+                ${state},
+                ${email},
+                ${confirmEmail},
+                ${password},
+                ${confirmPassword},
+                ${finalCode}    
+            );
+        `
+    }
+
+  async updateResgiter(registerId, newData) {
+      await sql`
+          UPDATE registers
+              SET 
+              name = ${newData.name},
+              cnpj = ${newData.cnpj},
+              stateRegistration = ${newData.stateRegistration},
+              openingDate = ${newData.openingDate},
+              corporateName = ${newData.corporateName},
+              cep = ${newData.cep},
+              address = ${newData.address},
+              number = ${newData.number},
+              neighborhood = ${newData.neighborhood},
+              city = ${newData.city},
+              state = ${newData.state},
+              email = ${newData.email},
+              confirmEmail = ${newData.confirmEmail},
+              password = ${newData.password},
+              confirmPassword = ${newData.confirmPassword},
+              finalCode  = ${newData.finalCode}
+  
+                 
+              WHERE
+                  id = ${registerId}
+      `
+
+      
+  }
 }
+
+
 
 export const DB = new Database()
