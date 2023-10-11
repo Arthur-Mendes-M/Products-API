@@ -47,17 +47,16 @@ class Database {
         SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
       `
 
-      console.log(typeof result)
       console.log('----------------')
-      console.log(result)
+      console.log(typeof result[0]) 
       console.log('----------------')
-      console.log(result[0])
+      console.log(result[0].employeephoto) 
       console.log('----------------')
-      console.log(Buffer(result)) 
+      console.log(Buffer.from(result[0])) 
       console.log('----------------')
-      console.log(new Buffer.from(result)) 
+      console.log(new Buffer.from(result[0].employeephoto)) 
 
-      return new Buffer.from(result)
+      return new Buffer.from(result[0].employeephoto)
     }
 
     async updateEmployee(employeeId, newData) {
