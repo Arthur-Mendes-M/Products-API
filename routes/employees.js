@@ -54,17 +54,26 @@ router.post('/', upload.single('image'), async (req, res) => {
 });
 
 router.get('/photo/:photoName', async (req, res) => {
-  const employeePhotoName = req.params.photoName
+  try {
+    const employeePhotoName = req.params.photoName
   
-  const photo = await DB.getEmployeePhoto(employeePhotoName)
+    const photo = await DB.getEmployeePhoto(employeePhotoName)
+  
+    res.setHeader('Content-Type', 'image/jpeg')
+    // res.send(photo)
+  
+    // res.setHeader('Content-Disposition', 'inline; filename="' + employeePhotoName + '"');
+  
+    console.log(photo)
 
-  res.setHeader('Content-Type', 'image/jpeg')
-  // res.send(photo)
-
-  // res.setHeader('Content-Disposition', 'inline; filename="' + employeePhotoName + '"');
-
-  // Enviar a imagem como resposta
-  res.end(photo);
+    // Enviar a imagem como resposta
+    res.end(photo);
+  } catch (error) {
+    console.log('Erro ao exibir a imagem')
+    console.log(error)
+    console.log(error.message)
+  }
+  
 })
 
 
