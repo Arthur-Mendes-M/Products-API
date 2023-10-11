@@ -61,10 +61,10 @@ router.get('/photo/:photoName', async (req, res) => {
   res.setHeader('Content-Type', 'image/jpeg')
   // res.send(photo)
 
-  res.setHeader('Content-Disposition', 'inline; filename="' + employeePhotoName + '"');
+  // res.setHeader('Content-Disposition', 'inline; filename="' + employeePhotoName + '"');
 
   // Enviar a imagem como resposta
-  res.end(photo, 'binary');
+  res.end(photo);
 })
 
 

@@ -47,7 +47,7 @@ class Database {
         SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
       `
 
-      return result.toString('base64')
+      return result
     }
 
     async updateEmployee(employeeId, newData) {
