@@ -1,7 +1,7 @@
 import { sql } from "./db.js";
 
 // sql`
-//     DROP TABLE products
+//     DROP TABLE registers
 // `.then(() => console.log('Table has been deleted'))
 
 sql`

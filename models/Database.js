@@ -50,10 +50,6 @@ class Database {
       const employeePhoto = result[0].employeephoto
       const buffer = new Buffer.from(employeePhoto)
 
-      console.log(typeof buffer)
-      console.log('----------------------')
-      console.log(buffer)
-
       return buffer
     }
 
