@@ -1,5 +1,4 @@
 import { sql } from "../database/db.js";
-import {randomUUID} from 'crypto'
 
 class Database {
   //Employee
@@ -107,7 +106,6 @@ class Database {
   }
 
     async createRegister(registers) {
-        const registerId = randomUUID()
         const {
             name,
             cnpj,
