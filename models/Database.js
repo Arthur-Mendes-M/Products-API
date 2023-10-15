@@ -146,7 +146,7 @@ class Database {
                 ${confirmEmail},
                 ${password},
                 ${confirmPassword},
-                ${finalCode}    
+                ${finalCode}
             );
         `
     }
