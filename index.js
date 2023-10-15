@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import router from './routes/employees.js';
 import registersRouter  from './routes/registers.js'
+import newsRouter from './routes/news.js'
 
 const server = express();
 
@@ -10,6 +11,8 @@ server.use(express.json());
 
 server.use('/employees', router);
 server.use('/registers', registersRouter );
+server.use('/news', newsRouter );
+
 
 server.get('/', (request, response) => {
   response.status(200).send('<h1>Rota raiz :)</h1>');

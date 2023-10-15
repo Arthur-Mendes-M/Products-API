@@ -179,6 +179,68 @@ class Database {
 
       
   }
+
+  //News
+
+  async listNews() {
+    const results = await sql`
+      SELECT * FROM news
+    `
+
+    return results
+  }
+
+  async getEmployee(newsId) {
+    const result = await sql`
+      SELECT * FROM news WHERE id = ${newsId}
+    `
+
+    return result
+  }
+
+  async createNews(news) {
+    const {
+      title, expirationDate, description, bannerFileName, bannerFile
+    } = news;
+  
+    await sql`
+      INSERT INTO news (
+        title, expirationDate, description, bannerFileName, bannerFile
+      ) VALUES (
+        ${title},${expirationDate},${description},${bannerFileName},${bannerFile}
+      );
+    `.then(() => console.log('Deu certo')).catch((error) => console.log(error))
+  }
+
+  async getbannerFile(bannerFileName) {
+    const result = await sql`
+      SELECT bannerFile FROM news WHERE bannerFileName = ${bannerFileName}
+    `
+
+    const bannerFile = result[0].bannerfile
+    const buffer = new Buffer.from(bannerFile)
+
+    return buffer
+  }
+
+  async updateNews(newsId, newData) {
+    await sql`
+     UPDATE news 
+       SET 
+         name = ${newData.name},
+         title = ${newData.title}, 
+         expirationDate = ${newData.expirationDate},
+          description = ${newData.description}, 
+          bannerFileName = ${newData.bannerFileName}, 
+          bannerFile = ${newData.bannerFile}
+
+       WHERE
+         id = ${newsId}
+   `
+ }
+
+  
+
 }
 
 
