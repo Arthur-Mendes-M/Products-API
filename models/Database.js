@@ -128,7 +128,7 @@ class Database {
 
         await sql`
             INSERT INTO registers (
-                id,  name, cnpj, stateRegistration, openingDate, corporateName, cep, address, number,
+                name, cnpj, stateRegistration, openingDate, corporateName, cep, address, number,
                 neighborhood, city, state, email, confirmEmail, password, confirmPassword, finalCode    
             ) VALUES (
                 ${name},
