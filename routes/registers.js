@@ -3,7 +3,7 @@ import { DB } from '../models/Database.js'
 const router = Router()
 
 router.get('/', async (request, response) => {
-    const registers = await DB.listRegisters()
+    const registers = await DB.listRegister()
     
     response.status(200).json(registers)
 })
