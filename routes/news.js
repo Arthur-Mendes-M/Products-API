@@ -21,10 +21,10 @@ router.post('/', upload.single('image'), async (req, res) => {
 
     await DB.createNews(completeNews);
 
-    res.status(201).json({ message: `Funcionário registrado com sucesso!` });
+    res.status(201).json({ message: `Notícia criado com sucesso!` });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
+    res.status(500).json({ message: 'Erro ao carregar a imagem ou criar a Notícia' });
   }
 });
 
@@ -49,18 +49,18 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const employee = await DB.getbannerFile(req.params.id);
+  const news = await DB.getNews(req.params.id);
 
-  res.status(200).json(employee)
+  res.status(200).json(news)
 })
 
 router.put('/:id', async (req, res) => {
   const newsId = req.params.id;
   const newData = req.body;
 
-  await DB.updateEmployee(newsId, newData);
+  await DB.updateNews(newsId, newData);
 
-  res.status(204).json({ message: 'Funcionário atualizado com sucesso' });
+  res.status(204).json({ message: 'Notícia atualizado com sucesso' });
 });
 
 

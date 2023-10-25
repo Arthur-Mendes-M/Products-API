@@ -190,7 +190,7 @@ class Database {
     return results
   }
 
-  async getEmployee(newsId) {
+  async getNews(newsId) {
     const result = await sql`
       SELECT * FROM news WHERE id = ${newsId}
     `

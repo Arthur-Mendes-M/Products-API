@@ -1,6 +1,7 @@
 import express from 'express';
-import { DB } from '../models/Database.js'; // Certifique-se de que o caminho esteja correto
+import { DB } from '../models/Database.js'; 
 import multer from 'multer';
+import 'dotenv/config';
 
 const router = express.Router();
 
@@ -67,5 +68,6 @@ router.put('/:id', async (req, res) => {
 
   res.status(204).json({ message: 'Funcionário atualizado com sucesso' });
 });
+
 
 export default router;
