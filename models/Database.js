@@ -239,7 +239,11 @@ class Database {
    `
  }
 
-  
+  async deleteNews(newsId) {
+    await sql`
+      DELETE FROM news WHERE id = ${newsId}
+    `
+  }
 
 }
 
