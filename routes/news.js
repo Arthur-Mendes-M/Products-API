@@ -65,5 +65,13 @@ router.put('/:id', async (req, res) => {
   res.status(204).json({ message: 'Notícia atualizado com sucesso' });
 });
 
+router.delete('/:id', async (req, res) => {
+  const newsId = req.params.id;
+  
+  await DB.deleteNews(newsId);
+
+  res.status(201).json({ message: 'Notícia removida com sucesso' });
+})
+
 
 export default router;
