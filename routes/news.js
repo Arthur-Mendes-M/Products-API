@@ -36,7 +36,7 @@ router.get('/bannerFile/:bannerFileName', async (req, res) => {
     // const bannerFileExt = bannerFileNameArray[bannerFileNameArray.length-1]
     const photo = await DB.getbannerFile(bannerFileName)
   
-    res.setHeader('Content-Type','image/jpg')
+    res.setHeader('Content-Type','image/jpeg')
 
     res.end(photo);
   } catch (error) {
