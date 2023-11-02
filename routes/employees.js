@@ -44,7 +44,7 @@ router.get('/photo/:photoName', async (req, res) => {
 
     res.end(photo);
   } catch (error) {
-    res.status().send({message: 'Erro ao exibir a imagem', error});
+    res.status(404).send({message: 'Erro ao exibir a imagem', error});
   }
 })
 
