@@ -61,26 +61,30 @@ router.get('/:id', async (req, res) => {
 })
 
 router.put('/:id', upload.single('image'), async (req, res) => {
-  const employeeId = req.params.id;
-  const newData = req.body;
-  const { originalname, buffer } = req.file;
-
-  let completeEmployee = {
-    ...req.body,
-    employeePhotoName: `${Date.now()}-${originalname}`,
-    employeePhoto: buffer
-  }
-
-  const benefits = req.body?.benefits
-    if(Array.isArray(benefits)) {
-      completeEmployee.benefits = benefits.join(', ')
-    } else {
-      completeEmployee.benefits = benefits ?? ''
+  try {
+    const employeeId = req.params.id;
+    const { originalname, buffer } = req.file;
+  
+    let completeEmployee = {
+      ...req.body,
+      employeePhotoName: `${Date.now()}-${originalname}`,
+      employeePhoto: buffer
     }
-
-  await DB.updateEmployee(employeeId, completeEmployee);
-
-  res.status(204).json({ message: 'Funcionário atualizado com sucesso' });
+  
+    const benefits = req.body?.benefits
+      if(Array.isArray(benefits)) {
+        completeEmployee.benefits = benefits.join(', ')
+      } else {
+        completeEmployee.benefits = benefits ?? ''
+      }
+  
+    await DB.updateEmployee(employeeId, completeEmployee);
+  
+    res.status(204).json({ message: 'Funcionário atualizado com sucesso' });
+  } catch(error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao carregar a imagem ou criar o registro de funcionário' });
+  }
 });
 
 
