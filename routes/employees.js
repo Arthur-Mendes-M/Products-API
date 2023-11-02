@@ -63,14 +63,22 @@ router.get('/:id', async (req, res) => {
 router.put('/:id', upload.single('image'), async (req, res) => {
   try {
     const employeeId = req.params.id;
-    const { originalname, buffer } = req.file;
+    let completeEmployee = {}
+    
+    if(req.file !== undefined) {
+      const { originalname, buffer } = req.file;
   
-    let completeEmployee = {
-      ...req.body,
-      employeePhotoName: `${Date.now()}-${originalname}`,
-      employeePhoto: buffer
+      completeEmployee = {
+        ...req.body,
+        employeePhotoName: `${Date.now()}-${originalname}`,
+        employeePhoto: buffer
+      }
+    } else {
+      completeEmployee = {
+        ...req.body,
+      }
     }
-  
+
     const benefits = req.body?.benefits
       if(Array.isArray(benefits)) {
         completeEmployee.benefits = benefits.join(', ')
