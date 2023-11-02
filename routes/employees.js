@@ -60,11 +60,25 @@ router.get('/:id', async (req, res) => {
   res.status(200).json(employee)
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', upload.single('image'), async (req, res) => {
   const employeeId = req.params.id;
   const newData = req.body;
+  const { originalname, buffer } = req.file;
 
-  await DB.updateEmployee(employeeId, newData);
+  let completeEmployee = {
+    ...req.body,
+    employeePhotoName: `${Date.now()}-${originalname}`,
+    employeePhoto: buffer
+  }
+
+  const benefits = req.body?.benefits
+    if(Array.isArray(benefits)) {
+      completeEmployee.benefits = benefits.join(', ')
+    } else {
+      completeEmployee.benefits = benefits ?? ''
+    }
+
+  await DB.updateEmployee(employeeId, completeEmployee);
 
   res.status(204).json({ message: 'Funcionário atualizado com sucesso' });
 });
