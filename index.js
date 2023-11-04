@@ -21,4 +21,6 @@ server.get('/', (request, response) => {
 server.listen({
   host: '0.0.0.0',
   port: process.env.PORT || 4040
+}, () => {
+  console.log(`Servidor iniciado na porta ${process.env.PORT ?? 4040}`)
 });

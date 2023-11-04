@@ -68,6 +68,9 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     if(req.file !== undefined) {
       const { originalname, buffer } = req.file;
   
+      // Possível codificação
+      // console.log(buffer.toString('base64'))
+
       completeEmployee = {
         ...req.body,
         employeePhotoName: `${Date.now()}-${originalname}`,
@@ -80,11 +83,11 @@ router.put('/:id', upload.single('image'), async (req, res) => {
     }
 
     const benefits = req.body?.benefits
-      if(Array.isArray(benefits)) {
-        completeEmployee.benefits = benefits.join(', ')
-      } else {
-        completeEmployee.benefits = benefits ?? ''
-      }
+    if(Array.isArray(benefits)) {
+      completeEmployee.benefits = benefits.join(', ')
+    } else {
+      completeEmployee.benefits = benefits ?? ''
+    }
   
     await DB.updateEmployee(employeeId, completeEmployee);
   

@@ -88,7 +88,7 @@ class Database {
             benefits = ${newData.benefits},
             bankAccount = ${newData.bankAccount},
             bank = ${newData.bank},
-            agency = ${newData.agency}, 
+            agency = ${newData.agency}
 
           WHERE
             id = ${employeeId}
