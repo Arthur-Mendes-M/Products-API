@@ -98,5 +98,12 @@ router.put('/:id', upload.single('image'), async (req, res) => {
   }
 });
 
+router.delete('/:id', async (req, res) => {
+  const employeeId = req.params.id
+
+  await DB.deleteEmployee(employeeId)
+
+  res.status(204).send({message: 'Funcionário deletado com sucesso'})
+})
 
 export default router;

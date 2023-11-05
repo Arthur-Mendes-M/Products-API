@@ -138,6 +138,12 @@ class Database {
       }
     }
 
+    async deleteEmployee(employeeId) {
+      await sql`
+        DELETE FROM employees WHERE id = ${employeeId}
+      `
+    }
+
     //Register
 
     async listRegister() {
