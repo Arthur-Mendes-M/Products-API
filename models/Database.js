@@ -7,8 +7,14 @@ class Database {
       const results = await sql`
         SELECT * FROM employees
       `
+      
+      const filteredResult = results.filter(employee => {
+        delete employee.employeePhoto
 
-      return results
+        return employee
+      })
+
+      return filteredResult
     }
 
     async getEmployee(employeeId) {
@@ -16,7 +22,14 @@ class Database {
         SELECT * FROM employees WHERE id = ${employeeId}
       `
 
-      return result
+      const filteredResult = result.filter(employeeData => {
+        delete employeeData.employeePhoto
+
+        return employeeData
+      })
+
+
+      return filteredResult
     }
 
     async createEmployee(employee) {
