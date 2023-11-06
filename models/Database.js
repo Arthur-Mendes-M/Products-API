@@ -7,7 +7,7 @@ class Database {
       const results = await sql`
         SELECT * FROM employees
       `
-      
+
       const filteredResult = results.filter(employee => {
         delete employee.employeePhoto
 
@@ -249,7 +249,13 @@ class Database {
       SELECT * FROM news
     `
 
-    return results
+    const filteredResults = results.filter(news => {
+      delete news.bunnerFile
+
+      return news
+    })
+
+    return filteredResults
   }
 
   async getNews(newsId) {
@@ -257,7 +263,13 @@ class Database {
       SELECT * FROM news WHERE id = ${newsId}
     `
 
-    return result
+    const filteredResult = result.filter(newsData => {
+      delete newsData.bunnerFile
+
+      return newsData
+    })
+
+    return filteredResult
   }
 
   async createNews(news) {
@@ -308,7 +320,5 @@ class Database {
   }
 
 }
-
-
 
 export const DB = new Database()
