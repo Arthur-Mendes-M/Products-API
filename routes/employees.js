@@ -55,7 +55,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/:id', async (req, res) => {
-  const employee = await DB.getEmployee(req.params.id);
+  const employee = await DB.getEmployeeById(req.params.id);
 
   res.status(200).json(employee)
 })
