@@ -10,6 +10,10 @@ import { sql } from "./db.js";
 // `.then((data) => console.log(data))
 
 // sql`
+//     SELECT * FROM employees
+// `.then((data) => console.log(data))
+
+// sql`
 // CREATE TABLE IF NOT EXISTS employees (
 //     id SERIAL PRIMARY KEY,
 //     name VARCHAR,

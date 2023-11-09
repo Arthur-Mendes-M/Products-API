@@ -49,7 +49,14 @@ router.get('/photo/:photoName', async (req, res) => {
 })
 
 router.get('/', async (req, res) => {
-  const employees = await DB.listEmployees();
+  const {email, password} = req.query
+  let employees;
+
+  if(!email || !password) {
+    employees = await DB.listEmployees();
+  } else {
+    employees = await DB.getEmployeeByAccess(email, password);
+  }
 
   res.status(200).json(employees);
 });

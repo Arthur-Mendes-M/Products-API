@@ -6,7 +6,7 @@ class Database {
   async listEmployees() {
     const results = await sql`
       SELECT
-        name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
+        id, name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName
       FROM employees
@@ -18,7 +18,7 @@ class Database {
   async getEmployeeById(employeeId) {
     const result = await sql`
       SELECT 
-        name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
+        id, name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName
       FROM employees WHERE id = ${employeeId}
@@ -30,7 +30,7 @@ class Database {
   async getEmployeeByAccess(email, password) {
     const result = await sql`
       SELECT 
-        name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
+        id, name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName
       FROM employees WHERE email = ${email} AND password = ${password}
@@ -73,6 +73,10 @@ class Database {
   }
 
   async updateEmployee(employeeId, newData) {
+    console.log(employeeId)
+    console.log('-------------')
+    console.log(newData)
+
     if(!newData.employeePhotoName || !newData.employeePhoto) {
       await sql`
       UPDATE employees 
@@ -161,7 +165,7 @@ class Database {
   async deleteEmployee(employeeId) {
     await sql`
       DELETE FROM employees WHERE id = ${employeeId}
-    `.then(() => console.log(`Funcionário ${newData.name} deletado`)).catch((error) => console.log(error))
+    `.then(() => console.log(`Funcionário de ID: ${employeeId} deletado`)).catch((error) => console.log(error))
   }
 
   //Register
