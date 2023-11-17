@@ -59,7 +59,27 @@ class Database {
         ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${journeyInit}, ${journeyEnd}, ${grossSalary},
         ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhotoName}, ${employeePhoto}
       );
-    `.then(() => console.log('Novo funionário registrado')).catch((error) => console.log(error))
+    `.then(() => {
+      console.log('Novo funionário registrado')
+
+      fetch('https://stafflink-chat-server.onrender.com/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          username: name, 
+          email, 
+          password,
+          isAvatarImageSet: true,
+          avatarImage: employeePhotoName
+        }),
+        credentials: 'include',
+      }).then(() => {
+        console.log('Novo usuário do chat interno cadastrado com sucesso')
+      })
+
+    }).catch((error) => console.log(error))
   }
 
   async getEmployeePhoto(employeePhotoName) {
