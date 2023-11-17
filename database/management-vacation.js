@@ -15,5 +15,5 @@ sql`
         notified BOOLEAN
 
     )
-`.then(() => console.log('Tables has been created'))
+`.then(() => console.log('Table has been created'))
 

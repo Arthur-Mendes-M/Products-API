@@ -21,7 +21,7 @@ router.post('/', upload.single('image'), async (req, res) => {
 
     await DB.createNews(completeNews);
 
-    res.status(201).json({ message: `Notícia criado com sucesso!` });
+    res.status(201).json({ message: `Notícia criada com sucesso!` });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao carregar a imagem ou criar a Notícia' });

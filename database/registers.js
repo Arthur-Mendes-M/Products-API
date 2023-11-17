@@ -25,6 +25,6 @@ sql`
         finalCode VARCHAR 
 
     )
-`.then(() => console.log('Tables has been created'))
+`.then(() => console.log('Table has been created'))
 
 // console.log(sql)

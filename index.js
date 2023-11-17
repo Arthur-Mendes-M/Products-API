@@ -4,6 +4,7 @@ import router from './routes/employees.js';
 import registersRouter  from './routes/registers.js'
 import newsRouter from './routes/news.js'
 import vacationRouter from './routes/vacation.js'
+import attendanceRouter from "./routes/attendance.js"
 
 const server = express();
 
@@ -14,6 +15,7 @@ server.use('/employees', router);
 server.use('/registers', registersRouter );
 server.use('/news', newsRouter );
 server.use('/vacation', vacationRouter)
+server.use("/attendance", attendanceRouter);
 
 
 server.get('/', (request, response) => {
