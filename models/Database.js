@@ -1,5 +1,6 @@
 import { sql } from "../database/db.js";
 import {vacationFactory} from "../factories/VacationFactory.js";
+const fetch = require('node-fetch');
 
 class Database {
   //Employee
