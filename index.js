@@ -3,6 +3,7 @@ import cors from 'cors';
 import router from './routes/employees.js';
 import registersRouter  from './routes/registers.js'
 import newsRouter from './routes/news.js'
+import vacationRouter from './routes/vacation.js'
 
 const server = express();
 
@@ -12,6 +13,7 @@ server.use(express.json());
 server.use('/employees', router);
 server.use('/registers', registersRouter );
 server.use('/news', newsRouter );
+server.use('/vacation', vacationRouter)
 
 
 server.get('/', (request, response) => {

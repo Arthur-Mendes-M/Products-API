@@ -1,4 +1,5 @@
 import { sql } from "../database/db.js";
+import VacationFactory from "../factories/VacationFactory.js";
 
 class Database {
   //Employee
@@ -339,6 +340,49 @@ class Database {
       DELETE FROM news WHERE id = ${newsId}
     `
   }
+
+  //Vacation
+  async createVacation(vacation){
+    const {
+      name, email, description, cpf, date, time, finished , notified 
+    } = vacation
+
+    await sql`
+    INSERT INTO vacation (
+      name, email, description, cpf, date, time, finished, notified
+    ) VALUES (
+      ${name},${email},${description},${cpf},${date},${time},${finished},${notified}
+    );
+    `.then(() => console.log('Novo registro de ferias feito')).catch((error) => console.log(error))
+  }
+
+  async GetAll(showFinished) {
+    const query = await sql`
+      SELECT * FROM vacation 
+    `    
+    if (!showFinished) {
+      query += await sql` WHERE finished = false`;
+    }
+
+    const { rows } = await pool.query(query);
+
+    const vacation = rows.map(vacation => ({
+      id: vacation.id,
+      name: vacation.name,
+      email: vacation.email,
+      description: vacation.description,
+      // ... mapeie os outros campos conforme necessário
+      date: vacation.date,
+      time: vacation.time,
+      finished: vacation.finished,
+      notified: vacation.notified,
+    }));
+    return vacations;
+  }
+
+ 
+
+
 
 }
 
