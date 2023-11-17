@@ -19,4 +19,4 @@ class VacationFactory {
     }
 }
 
-module.exports = new VacationFactory();
+export const vacationFactory = new VacationFactory();

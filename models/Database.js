@@ -1,5 +1,5 @@
 import { sql } from "../database/db.js";
-import VacationFactory from "../factories/VacationFactory.js";
+import vacationFactory from "../factories/vacationFactory.js";
 
 class Database {
   //Employee
