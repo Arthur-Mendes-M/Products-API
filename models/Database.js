@@ -376,7 +376,7 @@ class Database {
     `.then(() => console.log('Novo registro de ferias feito')).catch((error) => console.log(error))
   }
 
-  async GetAll(showFinished) {
+  async getAllVacations(showFinished) {
     const query = await sql`
       SELECT * FROM vacation 
     `    
@@ -397,12 +397,8 @@ class Database {
       finished: vacation.finished,
       notified: vacation.notified,
     }));
-    return vacations;
+    return vacation;
   }
-
- 
-
-
 
 }
 
