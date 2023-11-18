@@ -1,17 +1,17 @@
 // import { sql } from "./db.js";
 
-// // sql`
-// //     DROP TABLE employees
-// // `.then(() => console.log('Table has been deleted'))
+// sql`
+//     DROP TABLE employees
+// `.then(() => console.log('Table has been deleted'))
 
-// // sql`
-// //     select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS 
-// //     where TABLE_NAME = 'employees'
-// // `.then((data) => console.log(data))
+// sql`
+//     select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
+//     where TABLE_NAME = 'employees'
+// `.then((data) => console.log(data))
 
-// // sql`
-// //     SELECT * FROM employees
-// // `.then((data) => console.log(data))
+// sql`
+//     SELECT * FROM employees
+// `.then((data) => console.log(data))
 
 // sql`
 // CREATE TABLE IF NOT EXISTS employees (
@@ -52,4 +52,3 @@
 //     employeePhoto BYTEA
 //   )
 // `.then(() => console.log('Tables has been created'))
-

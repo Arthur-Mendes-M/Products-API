@@ -9,4 +9,3 @@
 //     bannerFile BYTEA
 //   )
 // `.then(() => console.log('Table has been created'))
-

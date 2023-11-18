@@ -1,4 +1,4 @@
-import { sql } from "./db.js";
+// import { sql } from "./db.js";
 
 // sql`
 //   CREATE TABLE IF NOT EXISTS attendance (
@@ -13,9 +13,9 @@ import { sql } from "./db.js";
 
 // sql`
 //   INSERT INTO attendance (
-//     attendanceDate, 
-//     entrance, 
-//     departure, 
+//     attendanceDate,
+//     entrance,
+//     departure,
 //     employeeIdAttendance
 //   ) VALUES (
 //     '2023-11-11',
