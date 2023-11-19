@@ -1,10 +1,10 @@
 import { sql } from "../database/db.js";
-import {vacationFactory} from "../factories/VacationFactory.js";
-import fetch from 'node-fetch'
+import { vacationFactory } from "../factories/VacationFactory.js";
+import fetch from "node-fetch";
 
 class Database {
   //Employee
-  
+
   async listEmployees() {
     const results = await sql`
       SELECT
@@ -12,9 +12,9 @@ class Database {
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName
       FROM employees
-    `
+    `;
 
-    return results
+    return results;
   }
 
   async getEmployeeById(employeeId) {
@@ -24,9 +24,9 @@ class Database {
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName
       FROM employees WHERE id = ${employeeId}
-    `
+    `;
 
-    return result
+    return result;
   }
 
   async getEmployeeByAccess(email, password) {
@@ -36,19 +36,49 @@ class Database {
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName
       FROM employees WHERE email = ${email} AND password = ${password}
-    `
+    `;
 
-    return result
+    return result;
   }
 
   async createEmployee(employee) {
     const {
-      name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
-      employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
-      state, office, sector, contract, journeyInit,  journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency,
-      employeePhotoName, employeePhoto
+      name,
+      birthday,
+      age,
+      genderIdentity,
+      pronoun,
+      motherName,
+      fatherName,
+      rg,
+      cpf,
+      pis,
+      employementCard,
+      tel,
+      cel,
+      email,
+      password,
+      cep,
+      address,
+      number,
+      neighborhood,
+      city,
+      state,
+      office,
+      sector,
+      contract,
+      journeyInit,
+      journeyEnd,
+      grossSalary,
+      hiring,
+      benefits,
+      bankAccount,
+      bank,
+      agency,
+      employeePhotoName,
+      employeePhoto,
     } = employee;
-  
+
     await sql`
       INSERT INTO employees (
         name, birthday, age, genderIdentity, pronoun, motherName, fatherName, rg, cpf, pis,
@@ -60,46 +90,47 @@ class Database {
         ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${journeyInit}, ${journeyEnd}, ${grossSalary},
         ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhotoName}, ${employeePhoto}
       );
-    `.then(() => {
-      console.log('Novo funionário registrado')
+    `
+      .then(() => {
+        console.log("Novo funionário registrado");
 
-      fetch('https://stafflink-chat-server.onrender.com/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          username: name, 
-          email, 
-          password,
-          isAvatarImageSet: true,
-          avatarImage: employeePhotoName
-        }),
-        credentials: 'include',
-      }).then(() => {
-        console.log('Novo usuário do chat interno cadastrado com sucesso')
+        fetch("https://stafflink-chat-server.onrender.com/api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: name,
+            email,
+            password,
+            isAvatarImageSet: true,
+            avatarImage: employeePhotoName,
+          }),
+          credentials: "include",
+        }).then(() => {
+          console.log("Novo usuário do chat interno cadastrado com sucesso");
+        });
       })
-
-    }).catch((error) => console.log(error))
+      .catch((error) => console.log(error));
   }
 
   async getEmployeePhoto(employeePhotoName) {
     const result = await sql`
       SELECT employeePhoto FROM employees WHERE employeePhotoName = ${employeePhotoName}
-    `
+    `;
 
-    const employeePhoto = result[0].employeephoto
-    const buffer = new Buffer.from(employeePhoto)
+    const employeePhoto = result[0].employeephoto;
+    const buffer = new Buffer.from(employeePhoto);
 
-    return buffer
+    return buffer;
   }
 
   async updateEmployee(employeeId, newData) {
-    console.log(employeeId)
-    console.log('-------------')
-    console.log(newData)
+    console.log(employeeId);
+    console.log("-------------");
+    console.log(newData);
 
-    if(!newData.employeePhotoName || !newData.employeePhoto) {
+    if (!newData.employeePhotoName || !newData.employeePhoto) {
       await sql`
       UPDATE employees 
         SET 
@@ -138,7 +169,11 @@ class Database {
 
         WHERE
           id = ${employeeId}
-      `.then(() => console.log(`Dados do funcionário ${newData.name}, alterados`)).catch((error) => console.log(error))
+      `
+        .then(() =>
+          console.log(`Dados do funcionário ${newData.name}, alterados`)
+        )
+        .catch((error) => console.log(error));
     } else {
       await sql`
         UPDATE employees 
@@ -180,14 +215,20 @@ class Database {
 
           WHERE
             id = ${employeeId}
-      `.then(() => console.log(`Dados do funcionário ${newData.name}, alterados`)).catch((error) => console.log(error))
+      `
+        .then(() =>
+          console.log(`Dados do funcionário ${newData.name}, alterados`)
+        )
+        .catch((error) => console.log(error));
     }
   }
 
   async deleteEmployee(employeeId) {
     await sql`
       DELETE FROM employees WHERE id = ${employeeId}
-    `.then(() => console.log(`Funcionário de ID: ${employeeId} deletado`)).catch((error) => console.log(error))
+    `
+      .then(() => console.log(`Funcionário de ID: ${employeeId} deletado`))
+      .catch((error) => console.log(error));
   }
 
   //Register
@@ -195,33 +236,32 @@ class Database {
   async listRegister() {
     const results = await sql`
         SELECT * FROM registers
-    `
+    `;
 
-    return results
+    return results;
   }
 
   async createRegister(registers) {
-      const {
-          name,
-          cnpj,
-          stateRegistration,
-          openingDate,
-          corporateName,
-          cep,
-          address,
-          number,
-          neighborhood,
-          city,
-          state,
-          email,
-          confirmEmail,
-          password,
-          confirmPassword,
-          finalCode    
+    const {
+      name,
+      cnpj,
+      stateRegistration,
+      openingDate,
+      corporateName,
+      cep,
+      address,
+      number,
+      neighborhood,
+      city,
+      state,
+      email,
+      confirmEmail,
+      password,
+      confirmPassword,
+      finalCode,
+    } = registers;
 
-      } = registers
-
-      await sql`
+    await sql`
           INSERT INTO registers (
               name, cnpj, stateRegistration, openingDate, corporateName, cep, address, number,
               neighborhood, city, state, email, confirmEmail, password, confirmPassword, finalCode    
@@ -243,7 +283,7 @@ class Database {
               ${confirmPassword},
               ${finalCode}
           );
-      `
+      `;
   }
 
   async updateResgiter(registerId, newData) {
@@ -270,9 +310,7 @@ class Database {
                 
             WHERE
                 id = ${registerId}
-    `
-
-    
+    `;
   }
 
   //News
@@ -285,9 +323,9 @@ class Database {
         description,
         bannerFileName
       FROM news
-    `
-    
-    return results
+    `;
+
+    return results;
   }
 
   async getNews(newsId) {
@@ -298,38 +336,39 @@ class Database {
         description,
         bannerFileName
       FROM news WHERE id = ${newsId}
-    `
+    `;
 
-    return result
+    return result;
   }
 
   async createNews(news) {
-    const {
-      title, expirationDate, description, bannerFileName, bannerFile
-    } = news;
-  
+    const { title, expirationDate, description, bannerFileName, bannerFile } =
+      news;
+
     await sql`
       INSERT INTO news (
         title, expirationDate, description, bannerFileName, bannerFile
       ) VALUES (
         ${title},${expirationDate},${description},${bannerFileName},${bannerFile}
       );
-    `.then(() => console.log('Nova notícia registrada')).catch((error) => console.log(error))
+    `
+      .then(() => console.log("Nova notícia registrada"))
+      .catch((error) => console.log(error));
   }
 
   async getbannerFile(bannerFileName) {
     const result = await sql`
       SELECT bannerFile FROM news WHERE bannerFileName = ${bannerFileName}
-    `
+    `;
 
-    const bannerFile = result[0].bannerfile
-    const buffer = new Buffer.from(bannerFile)
+    const bannerFile = result[0].bannerfile;
+    const buffer = new Buffer.from(bannerFile);
 
-    return buffer
+    return buffer;
   }
 
   async updateNews(newsId, newData) {
-    if(!newData.bannerFileName || !newData.bannerFile) {
+    if (!newData.bannerFileName || !newData.bannerFile) {
       await sql`
         UPDATE news 
           SET 
@@ -339,7 +378,7 @@ class Database {
             description = ${newData.description}, 
         WHERE
             id = ${newsId}
-      `
+      `;
     } else {
       await sql`
         UPDATE news 
@@ -352,21 +391,54 @@ class Database {
             bannerFile = ${newData.bannerFile}
         WHERE
             id = ${newsId}
-      `
+      `;
     }
   }
 
   async deleteNews(newsId) {
     await sql`
       DELETE FROM news WHERE id = ${newsId}
-    `
+    `;
+  }
+
+  //attendance
+
+  async getAttendanceOfCurrentEmployee(employeeId) {
+    let result = await sql`
+    SELECT * FROM attendance WHERE employeeIdAttendance = ${employeeId};
+  `;
+
+    return result;
+  }
+
+  async getAttendanceOfEveryEmployee() {
+    let result = await sql`
+    SELECT * FROM attendance
+  `;
+
+    return result;
+  }
+
+  async registerAttendance(attendance) {
+    await sql`
+      INSERT INTO attendance (
+        attendanceDate, 
+        entrance, 
+        departure, 
+        employeeIdAttendance
+      ) VALUES (
+        ${attendance.date},
+        ${attendance.entrance},
+        ${attendance.departure},
+        ${attendance.employeeId}
+      )
+    `;
   }
 
   //Vacation
-  async createVacation(vacation){
-    const {
-      name, email, description, cpf, date, time, finished , notified 
-    } = vacation
+  async createVacation(vacation) {
+    const { name, email, description, cpf, date, time, finished, notified } =
+      vacation;
 
     await sql`
     INSERT INTO vacation (
@@ -374,20 +446,22 @@ class Database {
     ) VALUES (
       ${name},${email},${description},${cpf},${date},${time},${finished},${notified}
     );
-    `.then(() => console.log('Novo registro de ferias feito')).catch((error) => console.log(error))
+    `
+      .then(() => console.log("Novo registro de ferias feito"))
+      .catch((error) => console.log(error));
   }
 
   async getAllVacations(showFinished) {
     const query = await sql`
       SELECT * FROM vacation 
-    `    
+    `;
     if (!showFinished) {
       query += await sql` WHERE finished = false`;
     }
 
     const { rows } = await pool.query(query);
 
-    const vacation = rows.map(vacation => ({
+    const vacation = rows.map((vacation) => ({
       id: vacation.id,
       name: vacation.name,
       email: vacation.email,
@@ -400,7 +474,6 @@ class Database {
     }));
     return vacation;
   }
-
 }
 
-export const DB = new Database()
+export const DB = new Database();

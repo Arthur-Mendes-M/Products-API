@@ -1,11 +1,11 @@
-import { sql } from "./db.js";
+// import { sql } from "./db.js";
 
 // sql`
 //     DROP TABLE employees
 // `.then(() => console.log('Table has been deleted'))
 
 // sql`
-//     select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS 
+//     select COLUMN_NAME from INFORMATION_SCHEMA.COLUMNS
 //     where TABLE_NAME = 'employees'
 // `.then((data) => console.log(data))
 
@@ -52,4 +52,3 @@ import { sql } from "./db.js";
 //     employeePhoto BYTEA
 //   )
 // `.then(() => console.log('Tables has been created'))
-

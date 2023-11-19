@@ -1,28 +1,28 @@
-import { Router } from 'express'
-import { DB } from '../models/Database.js'
-const router = Router()
+import { Router } from "express";
+import { DB } from "../models/Database.js";
+const router = Router();
 
-router.get('/', async (request, response) => {
-    const registers = await DB.listRegister()
-    
-    response.status(200).json(registers)
-})
+router.get("/", async (request, response) => {
+  const registers = await DB.listRegister();
 
-router.post('/', async (request, response) => {
-    const register = request.body
+  response.status(200).json(registers);
+});
 
-    await DB.createRegister(register)
+router.post("/", async (request, response) => {
+  const register = request.body;
 
-    response.status(201).send()
-})
+  await DB.createRegister(register);
 
-router.put('/:id', async (request, response) => {
-    const registerId = request.params.id
-    const newData = request.body
+  response.status(201).send();
+});
 
-    await DB.updateResgiter(registerId, newData)
+router.put("/:id", async (request, response) => {
+  const registerId = request.params.id;
+  const newData = request.body;
 
-    response.status(200).send()
-})
+  await DB.updateResgiter(registerId, newData);
 
-export default router
+  response.status(200).send();
+});
+
+export default router;
