@@ -419,9 +419,7 @@ class Database {
     return result;
   }
 
-  async registerAttendance() {
-    const attendance = req.body;
-
+  async registerAttendance(attendance) {
     await sql`
       INSERT INTO attendance (
         attendanceDate, 
@@ -434,14 +432,7 @@ class Database {
         ${attendance.departure},
         ${attendance.employeeId}
       )
-    `; //.then(() => {
-    //   console.log("Deu certo");
-    // })
-    // .catch((error) => {
-    //   console.log("Erro no SQL");
-    //   console.log(error.message);
-    //   console.log(req.body);
-    // });
+    `;
   }
 
   //Vacation
