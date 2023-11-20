@@ -18,7 +18,7 @@
 //     departure,
 //     employeeIdAttendance
 //   ) VALUES (
-//     '2023-11-11',
+//     '2023-12-25',
 //     '08:51',
 //     '18:47',
 //     1
