@@ -23,4 +23,14 @@ router.post("/", async (req, res) => {
   res.status(200).send();
 });
 
+router.delete("/:employeeId", async (req, res) => {
+  const employeeId = req.params.employeeId;
+
+  await DB.deleteAttendance(employeeId);
+
+  res
+    .status(201)
+    .json({ message: "Marcação de ponto removida(s) com sucesso" });
+});
+
 export default router;

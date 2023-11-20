@@ -1,4 +1,5 @@
 // import { sql } from "./db.js";
+
 // sql`
 // CREATE TABLE IF NOT EXISTS news (
 //     id SERIAL PRIMARY KEY,
@@ -8,4 +9,4 @@
 //     bannerFileName VARCHAR,
 //     bannerFile BYTEA
 //   )
-// `.then(() => console.log('Table has been created'))
+// `.then(() => console.log("Table has been created"));

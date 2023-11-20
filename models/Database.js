@@ -217,24 +217,29 @@ class Database {
             id = ${employeeId}
       `
         .then(() => {
-          console.log(`Dados do funcionário ${newData.name}, alterados`)
+          console.log(`Dados do funcionário ${newData.name}, alterados`);
 
-          fetch(`https://stafflink-chat-server.onrender.com/api/auth/getUserByEmail/${newData.email}`)
-          .then((data) => data.json())
-          .then((user) => {
-            fetch(`https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user._id}`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                image: newData.employeePhotoName,
-              }),
-              credentials: "include",
-            }).then(() => {
-              console.log("Foto alterado com sucesso");
+          fetch(
+            `https://stafflink-chat-server.onrender.com/api/auth/getUserByEmail/${newData.email}`
+          )
+            .then((data) => data.json())
+            .then((user) => {
+              fetch(
+                `https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user._id}`,
+                {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    image: newData.employeePhotoName,
+                  }),
+                  credentials: "include",
+                }
+              ).then(() => {
+                console.log("Foto alterado com sucesso");
+              });
             });
-          })
         })
         .catch((error) => console.log(error));
     }
@@ -418,7 +423,7 @@ class Database {
     `;
   }
 
-  //attendance
+  //Attendance
 
   async getAttendanceOfCurrentEmployee(employeeId) {
     let result = await sql`
@@ -449,6 +454,40 @@ class Database {
         ${attendance.departure},
         ${attendance.employeeId}
       )
+    `;
+  }
+
+  async deleteAttendance(employeeId) {
+    await sql`
+      DELETE FROM attendance WHERE employeeIdAttendance = ${employeeId}
+    `;
+  }
+
+  //Tolken
+
+  async registerTolken(tolken) {
+    await sql`
+      INSERT INTO tolken (
+       tolkenNumber
+      ) VALUES (
+        ${tolken.tolkenNumber}
+      )
+    `;
+  }
+
+  async getTolken() {
+    let result = await sql`
+    SELECT * FROM tolken
+  `;
+
+    return result;
+  }
+
+  async updateTolken(tolkenNumber, newTolkenNumber) {
+    await sql`
+      UPDATE tolken
+      SET tolkenNumber = ${newTolkenNumber}
+      WHERE tolkenNumber = ${tolkenNumber}
     `;
   }
 

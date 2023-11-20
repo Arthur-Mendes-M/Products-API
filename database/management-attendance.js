@@ -6,8 +6,7 @@
 //     attendanceDate VARCHAR(10),
 //     entrance VARCHAR(5),
 //     departure VARCHAR(5),
-//     employeeIdAttendance INTEGER,
-//     FOREIGN KEY (employeeIdAttendance) REFERENCES employees(id)
+//     employeeIdAttendance INTEGER
 //   )
 // `.then(() => console.log("Table has been created"));
 
@@ -18,9 +17,13 @@
 //     departure,
 //     employeeIdAttendance
 //   ) VALUES (
-//     '2023-12-25',
+//     '2023-11-20',
 //     '08:51',
 //     '18:47',
 //     1
 //   )
 // `.then(() => console.log("Attendance has been created"));
+
+// sql`
+//     DROP TABLE attendance
+// `.then(() => console.log('Table has been deleted'))

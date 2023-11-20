@@ -5,6 +5,7 @@ import registersRouter from "./routes/registers.js";
 import newsRouter from "./routes/news.js";
 import vacationRouter from "./routes/vacation.js";
 import attendanceRouter from "./routes/attendance.js";
+import tolkenRouter from "./routes/tolken.js"
 
 const server = express();
 
@@ -16,6 +17,7 @@ server.use("/registers", registersRouter);
 server.use("/news", newsRouter);
 server.use("/vacation", vacationRouter);
 server.use("/attendance", attendanceRouter);
+server.use("/tolken", tolkenRouter);
 
 server.get("/", (request, response) => {
   response.status(200).send("<h1>Rota raiz :)</h1>");
