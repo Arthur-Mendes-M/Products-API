@@ -30,11 +30,9 @@ router.post("/", upload.single("image"), async (req, res) => {
     res.status(201).json({ message: `Funcionário registrado com sucesso!` });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        message: "Erro ao carregar a imagem ou criar o registro de funcionário",
-      });
+    res.status(500).json({
+      message: "Erro ao carregar a imagem ou criar o registro de funcionário",
+    });
   }
 });
 
@@ -105,11 +103,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     res.status(204).json({ message: "Funcionário atualizado com sucesso" });
   } catch (error) {
     console.error(error);
-    res
-      .status(500)
-      .json({
-        message: "Erro ao carregar a imagem ou criar o registro de funcionário",
-      });
+    res.status(500).json({
+      message: "Erro ao carregar a imagem ou criar o registro de funcionário",
+    });
   }
 });
 

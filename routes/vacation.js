@@ -1,12 +1,12 @@
-import express from 'express';
-import { DB } from '../models/Database.js'; 
+import express from "express";
+import { DB } from "../models/Database.js";
 
 const router = express.Router();
 
 router.get("/cadastro", (req, res) => {
   res.render("create");
 });
-  
+
 router.post("/create", async (req, res) => {
   const { name, email, description, cpf, date, time } = req.body;
 
@@ -24,4 +24,4 @@ router.get("/getcalendar", async (req, res) => {
   res.json(vacations);
 });
 
-export default router
+export default router;
