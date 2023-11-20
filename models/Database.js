@@ -222,7 +222,7 @@ class Database {
           fetch(`https://stafflink-chat-server.onrender.com/api/auth/getUserByEmail/${newData.email}`)
           .then((data) => data.json())
           .then((user) => {
-            fetch(`https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user.id}`, {
+            fetch(`https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user._id}`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
