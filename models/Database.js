@@ -228,7 +228,7 @@ class Database {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                avatarImage: newData.employeePhotoName,
+                image: newData.employeePhotoName,
               }),
               credentials: "include",
             }).then(() => {
