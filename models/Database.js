@@ -216,9 +216,26 @@ class Database {
           WHERE
             id = ${employeeId}
       `
-        .then(() =>
+        .then(() => {
           console.log(`Dados do funcionário ${newData.name}, alterados`)
-        )
+
+          fetch(`https://stafflink-chat-server.onrender.com/api/auth/getUserByEmail/${newData.email}`)
+          .then((data) => data.json())
+          .then((user) => {
+            fetch(`https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user.id}`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                avatarImage: newData.employeePhotoName,
+              }),
+              credentials: "include",
+            }).then(() => {
+              console.log("Foto alterado com sucesso");
+            });
+          })
+        })
         .catch((error) => console.log(error));
     }
   }
