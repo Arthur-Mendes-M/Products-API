@@ -224,21 +224,23 @@ class Database {
           )
             .then((data) => data.json())
             .then((user) => {
-              fetch(
-                `https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user._id}`,
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    image: newData.employeePhotoName,
-                  }),
-                  credentials: "include",
-                }
-              ).then(() => {
-                console.log("Foto alterado com sucesso");
-              });
+              if(user && user._id) {
+                fetch(
+                  `https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user._id}`,
+                  {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      image: newData.employeePhotoName,
+                    }),
+                    credentials: "include",
+                  }
+                ).then(() => {
+                  console.log("Foto alterado com sucesso");
+                });
+              }
             });
         })
         .catch((error) => console.log(error));
