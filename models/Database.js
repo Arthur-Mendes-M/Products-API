@@ -85,10 +85,10 @@ class Database {
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName, employeePhoto
       ) VALUES (
-        ${name ?? ''}, ${birthday ?? ''}, ${age ?? ''}, ${genderIdentity ?? ''}, ${pronoun ?? ''}, ${motherName ?? ''}, ${fatherName ?? ''}, ${rg ?? ''},
-        ${cpf ?? ''}, ${pis ?? ''}, ${employementCard ?? ''}, ${tel ?? ''}, ${cel ?? ''}, ${email ?? ''}, ${password ?? ''}, ${cep ?? ''}, ${address ?? ''},
-        ${number ?? ''}, ${neighborhood ?? ''}, ${city ?? ''}, ${state ?? ''}, ${office ?? ''}, ${sector ?? ''}, ${contract ?? ''}, ${journeyInit ?? ''}, ${journeyEnd ?? ''}, ${grossSalary ?? ''},
-        ${hiring ?? ''}, ${benefits ?? ''}, ${bankAccount ?? ''}, ${bank ?? ''}, ${agency ?? ''}, ${employeePhotoName ?? ''}, ${employeePhoto ?? ''}
+        ${name ?? null}, ${birthday ?? null}, ${age ?? null}, ${genderIdentity ?? null}, ${pronoun ?? null}, ${motherName ?? null}, ${fatherName ?? null}, ${rg ?? null},
+        ${cpf ?? null}, ${pis ?? null}, ${employementCard ?? null}, ${tel ?? null}, ${cel ?? null}, ${email ?? null}, ${password ?? null}, ${cep ?? null}, ${address ?? null},
+        ${number ?? null}, ${neighborhood ?? null}, ${city ?? null}, ${state ?? null}, ${office ?? null}, ${sector ?? null}, ${contract ?? null}, ${journeyInit ?? null}, ${journeyEnd ?? null}, ${grossSalary ?? null},
+        ${hiring ?? null}, ${benefits ?? null}, ${bankAccount ?? null}, ${bank ?? null}, ${agency ?? null}, ${employeePhotoName ?? null}, ${employeePhoto ?? null}
       );
     `
       .then(() => {

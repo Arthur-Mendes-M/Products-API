@@ -1,4 +1,4 @@
-// import { sql } from "./db.js";
+import { sql } from "./db.js";
 
 // sql`
 //     DROP TABLE employees
@@ -9,9 +9,9 @@
 //     where TABLE_NAME = 'employees'
 // `.then((data) => console.log(data))
 
-// sql`
-//     SELECT * FROM employees
-// `.then((data) => console.log(data))
+sql`
+    SELECT * FROM employees
+`.then((data) => console.log(data))
 
 // sql`
 // CREATE TABLE IF NOT EXISTS employees (
