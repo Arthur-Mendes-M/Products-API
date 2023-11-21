@@ -85,10 +85,10 @@ class Database {
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName, employeePhoto
       ) VALUES (
-        ${name}, ${birthday}, ${age}, ${genderIdentity}, ${pronoun}, ${motherName}, ${fatherName}, ${rg},
-        ${cpf}, ${pis}, ${employementCard}, ${tel}, ${cel}, ${email}, ${password}, ${cep}, ${address},
-        ${number}, ${neighborhood}, ${city}, ${state}, ${office}, ${sector}, ${contract}, ${journeyInit}, ${journeyEnd}, ${grossSalary},
-        ${hiring}, ${benefits}, ${bankAccount}, ${bank}, ${agency}, ${employeePhotoName}, ${employeePhoto}
+        ${name ?? ''}, ${birthday ?? ''}, ${age ?? ''}, ${genderIdentity ?? ''}, ${pronoun ?? ''}, ${motherName ?? ''}, ${fatherName ?? ''}, ${rg ?? ''},
+        ${cpf ?? ''}, ${pis ?? ''}, ${employementCard ?? ''}, ${tel ?? ''}, ${cel ?? ''}, ${email ?? ''}, ${password ?? ''}, ${cep ?? ''}, ${address ?? ''},
+        ${number ?? ''}, ${neighborhood ?? ''}, ${city ?? ''}, ${state ?? ''}, ${office ?? ''}, ${sector ?? ''}, ${contract ?? ''}, ${journeyInit ?? ''}, ${journeyEnd ?? ''}, ${grossSalary ?? ''},
+        ${hiring ?? ''}, ${benefits ?? ''}, ${bankAccount ?? ''}, ${bank ?? ''}, ${agency ?? ''}, ${employeePhotoName ?? ''}, ${employeePhoto ?? ''}
       );
     `
       .then(() => {
