@@ -36,6 +36,11 @@ router.post("/", upload.single("image"), async (req, res) => {
       completeEmployee.benefits = benefits ?? "";
     }
 
+    // Map employee object and replace all undefined values to null value
+    Object.values(completeEmployee).forEach((value, index) => {
+      value ?? (completeEmployee[index] = null)
+    })
+
     await DB.createEmployee(completeEmployee);
 
     res.status(201).json({ message: `Funcionário registrado com sucesso!` });
