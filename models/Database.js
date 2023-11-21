@@ -94,22 +94,24 @@ class Database {
       .then(() => {
         console.log("Novo funionário registrado");
 
-        fetch("https://stafflink-chat-server.onrender.com/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            username: name,
-            email,
-            password,
-            isAvatarImageSet: true,
-            avatarImage: employeePhotoName,
-          }),
-          credentials: "include",
-        }).then(() => {
-          console.log("Novo usuário do chat interno cadastrado com sucesso");
-        });
+        if(employee.name !== null || employee.name !== undefined || employee.name !== '') {
+          fetch("https://stafflink-chat-server.onrender.com/api/auth/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              username: name,
+              email,
+              password,
+              isAvatarImageSet: true,
+              avatarImage: employeePhotoName,
+            }),
+            credentials: "include",
+          }).then(() => {
+            console.log("Novo usuário do chat interno cadastrado com sucesso");
+          });
+        }
       })
       .catch((error) => console.log(error));
   }
