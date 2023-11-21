@@ -10,14 +10,25 @@ const upload = multer({ storage });
 
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const { originalname, buffer } = req?.file;
+    let completeEmployee = {}
 
-    let completeEmployee = {
-      ...req.body,
-      employeePhotoName: typeof originalname !== '' ? null : `${Date.now()}-${originalname}`,
-      employeePhoto: buffer === undefined ? null : buffer,
-    };
+    if(req.file === undefined || req.file === null) {
+      completeEmployee = {
+        ...req.body,
+        employeePhotoName: null,
+        employeePhoto: null,
+      };
 
+    } else {
+      const { originalname, buffer } = req.file;
+
+      completeEmployee = {
+        ...req.body,
+        employeePhotoName: `${Date.now()}-${originalname}`,
+        employeePhoto: buffer,
+      };
+    }
+  
     const benefits = req.body?.benefits;
     if (Array.isArray(benefits)) {
       completeEmployee.benefits = benefits.join(", ");
