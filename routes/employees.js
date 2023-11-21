@@ -14,8 +14,8 @@ router.post("/", upload.single("image"), async (req, res) => {
 
     let completeEmployee = {
       ...req.body,
-      employeePhotoName: `${Date.now()}-${originalname}`,
-      employeePhoto: buffer,
+      employeePhotoName: typeof originalname !== '' ? null : `${Date.now()}-${originalname}`,
+      employeePhoto: buffer === undefined ? null : buffer,
     };
 
     const benefits = req.body?.benefits;
