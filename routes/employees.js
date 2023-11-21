@@ -10,7 +10,7 @@ const upload = multer({ storage });
 
 router.post("/", upload.single("image"), async (req, res) => {
   try {
-    const { originalname, buffer } = req.file;
+    const { originalname, buffer } = req?.file;
 
     let completeEmployee = {
       ...req.body,
