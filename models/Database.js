@@ -85,30 +85,51 @@ class Database {
         employementCard, tel, cel, email, password, cep, address, number, neighborhood, city,
         state, office, sector, contract, journeyInit, journeyEnd, grossSalary, hiring, benefits, bankAccount, bank, agency, employeePhotoName, employeePhoto
       ) VALUES (
-        ${name ?? null}, ${birthday ?? null}, ${age ?? null}, ${genderIdentity ?? null}, ${pronoun ?? null}, ${motherName ?? null}, ${fatherName ?? null}, ${rg ?? null},
-        ${cpf ?? null}, ${pis ?? null}, ${employementCard ?? null}, ${tel ?? null}, ${cel ?? null}, ${email ?? null}, ${password ?? null}, ${cep ?? null}, ${address ?? null},
-        ${number ?? null}, ${neighborhood ?? null}, ${city ?? null}, ${state ?? null}, ${office ?? null}, ${sector ?? null}, ${contract ?? null}, ${journeyInit ?? null}, ${journeyEnd ?? null}, ${grossSalary ?? null},
-        ${hiring ?? null}, ${benefits ?? null}, ${bankAccount ?? null}, ${bank ?? null}, ${agency ?? null}, ${employeePhotoName ?? null}, ${employeePhoto ?? null}
+        ${name ?? null}, ${birthday ?? null}, ${age ?? null}, ${
+      genderIdentity ?? null
+    }, ${pronoun ?? null}, ${motherName ?? null}, ${fatherName ?? null}, ${
+      rg ?? null
+    },
+        ${cpf ?? null}, ${pis ?? null}, ${employementCard ?? null}, ${
+      tel ?? null
+    }, ${cel ?? null}, ${email ?? null}, ${password ?? null}, ${cep ?? null}, ${
+      address ?? null
+    },
+        ${number ?? null}, ${neighborhood ?? null}, ${city ?? null}, ${
+      state ?? null
+    }, ${office ?? null}, ${sector ?? null}, ${contract ?? null}, ${
+      journeyInit ?? null
+    }, ${journeyEnd ?? null}, ${grossSalary ?? null},
+        ${hiring ?? null}, ${benefits ?? null}, ${bankAccount ?? null}, ${
+      bank ?? null
+    }, ${agency ?? null}, ${employeePhotoName ?? null}, ${employeePhoto ?? null}
       );
     `
       .then(() => {
         console.log("Novo funionário registrado");
 
-        if(employee.name !== null || employee.name !== undefined || employee.name !== '') {
-          fetch("https://stafflink-chat-server.onrender.com/api/auth/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              username: name,
-              email,
-              password,
-              isAvatarImageSet: true,
-              avatarImage: employeePhotoName,
-            }),
-            credentials: "include",
-          }).then(() => {
+        if (
+          employee.name !== null ||
+          employee.name !== undefined ||
+          employee.name !== ""
+        ) {
+          fetch(
+            "https://stafflink-chat-server.onrender.com/api/auth/register",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                username: name,
+                email,
+                password,
+                isAvatarImageSet: true,
+                avatarImage: employeePhotoName,
+              }),
+              credentials: "include",
+            }
+          ).then(() => {
             console.log("Novo usuário do chat interno cadastrado com sucesso");
           });
         }
@@ -226,7 +247,7 @@ class Database {
           )
             .then((data) => data.json())
             .then((user) => {
-              if(user && user._id) {
+              if (user && user._id) {
                 fetch(
                   `https://stafflink-chat-server.onrender.com/api/auth/setavatar/${user._id}`,
                   {
@@ -344,6 +365,7 @@ class Database {
   async listNews() {
     const results = await sql`
       SELECT 
+        id,
         title,
         expirationDate,
         description,
@@ -357,6 +379,7 @@ class Database {
   async getNews(newsId) {
     const result = await sql`
       SELECT 
+        id,
         title,
         expirationDate,
         description,
@@ -431,7 +454,7 @@ class Database {
 
   async getAttendanceOfCurrentEmployee(employeeId) {
     let result = await sql`
-    SELECT * FROM attendance WHERE employeeIdAttendance = ${employeeId};
+    SELECT * FROM attendance WHERE employeeIdAttendance = ${employeeId ?? null};
   `;
 
     return result;
@@ -453,10 +476,10 @@ class Database {
         departure, 
         employeeIdAttendance
       ) VALUES (
-        ${attendance.date},
-        ${attendance.entrance},
-        ${attendance.departure},
-        ${attendance.employeeId}
+        ${attendance.date ?? null},
+        ${attendance.entrance ?? null},
+        ${attendance.departure ?? null},
+        ${attendance.employeeId ?? null}
       )
     `;
   }
@@ -464,6 +487,14 @@ class Database {
   async deleteAttendance(employeeId) {
     await sql`
       DELETE FROM attendance WHERE employeeIdAttendance = ${employeeId}
+    `;
+  }
+
+  async updateAttendanceDeparture(employeeId, newAttendanceDeparture) {
+    await sql`
+      UPDATE attendance
+      SET departure = ${newAttendanceDeparture}
+      WHERE employeeidattendance = ${employeeId} AND departure IS NULL
     `;
   }
 
