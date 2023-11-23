@@ -1,12 +1,12 @@
-// import { sql } from "./db.js";
+import { sql } from "./db.js";
 
 // sql`
 //   CREATE TABLE IF NOT EXISTS attendance (
 //     attendanceId SERIAL PRIMARY KEY,
-//     attendanceDate VARCHAR(10),
-//     entrance VARCHAR(5),
-//     departure VARCHAR(5),
-//     employeeIdAttendance INTEGER
+//     attendanceDate VARCHAR,
+//     entrance VARCHAR,
+//     departure VARCHAR,
+//     employeeIdAttendance VARCHAR
 //   )
 // `.then(() => console.log("Table has been created"));
 
@@ -20,7 +20,7 @@
 //     '2023-11-20',
 //     '08:51',
 //     '18:47',
-//     1
+//     '1'
 //   )
 // `.then(() => console.log("Attendance has been created"));
 
