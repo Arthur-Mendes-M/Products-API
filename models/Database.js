@@ -454,16 +454,18 @@ class Database {
 
   async getAttendanceOfCurrentEmployee(employeeId) {
     let result = await sql`
-    SELECT * FROM attendance WHERE employeeIdAttendance = ${employeeId ?? null};
-  `;
+      SELECT * FROM attendance WHERE employeeIdAttendance = ${employeeId ?? null};
+    `;
 
     return result;
   }
 
   async getAttendanceOfEveryEmployee() {
     let result = await sql`
-    SELECT * FROM attendance
-  `;
+      SELECT name, sector, employeePhotoName, journeyInit, journeyEnd, attendanceDate, entrance, departure, employeeIdAttendance
+      FROM attendance
+      INNER JOIN employees ON employees.id = CAST(attendance.employeeIdAttendance AS INTEGER)
+    `;
 
     return result;
   }

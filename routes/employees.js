@@ -125,6 +125,8 @@ router.delete("/:id", async (req, res) => {
 
   await DB.deleteEmployee(employeeId);
 
+  await DB.deleteAttendance(employeeId);
+
   res.status(204).send({ message: "Funcionário deletado com sucesso" });
 });
 
