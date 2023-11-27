@@ -516,12 +516,12 @@ class Database {
     await sql`
       INSERT INTO vacation (
         title, 
-        eventend, 
-        eventstart
+        "end", 
+        "start"
       ) VALUES (
-        ${vacation.title},
-        ${vacation.eventend},
-        ${vacation.eventstard}
+        ${vacation.title ?? null},
+        ${vacation.end ?? null},
+        ${vacation.start ?? null}
       )
     `;
   }
