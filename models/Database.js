@@ -454,7 +454,9 @@ class Database {
 
   async getAttendanceOfCurrentEmployee(employeeId) {
     let result = await sql`
-      SELECT * FROM attendance WHERE employeeIdAttendance = ${employeeId ?? null};
+      SELECT * FROM attendance WHERE employeeIdAttendance = ${
+        employeeId ?? null
+      };
     `;
 
     return result;
@@ -500,7 +502,38 @@ class Database {
     `;
   }
 
-  //Tolken
+  //Vacation
+
+  async listVacations() {
+    const results = await sql`
+        SELECT * FROM vacation
+    `;
+
+    return results;
+  }
+
+  async registerVacation(vacation) {
+    await sql`
+      INSERT INTO vacation (
+        title, 
+        eventend, 
+        eventstart
+      ) VALUES (
+        ${vacation.title},
+        ${vacation.eventend},
+        ${vacation.eventstard}
+      )
+    `;
+  }
+
+  async deleteVacation(id) {
+    await sql`
+      DELETE FROM vacation WHERE id = ${id}
+    `;
+  }
+
+
+  //Token
 
   async registerTolken(tolken) {
     await sql`
@@ -516,7 +549,6 @@ class Database {
     let result = await sql`
     SELECT * FROM tolken
   `;
-
     return result;
   }
 
@@ -526,46 +558,6 @@ class Database {
       SET tolkenNumber = ${newTolkenNumber}
       WHERE tolkenNumber = ${tolkenNumber}
     `;
-  }
-
-  //Vacation
-  async createVacation(vacation) {
-    const { name, email, description, cpf, date, time, finished, notified } =
-      vacation;
-
-    await sql`
-    INSERT INTO vacation (
-      name, email, description, cpf, date, time, finished, notified
-    ) VALUES (
-      ${name},${email},${description},${cpf},${date},${time},${finished},${notified}
-    );
-    `
-      .then(() => console.log("Novo registro de ferias feito"))
-      .catch((error) => console.log(error));
-  }
-
-  async getAllVacations(showFinished) {
-    const query = await sql`
-      SELECT * FROM vacation 
-    `;
-    if (!showFinished) {
-      query += await sql` WHERE finished = false`;
-    }
-
-    const { rows } = await pool.query(query);
-
-    const vacation = rows.map((vacation) => ({
-      id: vacation.id,
-      name: vacation.name,
-      email: vacation.email,
-      description: vacation.description,
-      // ... mapeie os outros campos conforme necessário
-      date: vacation.date,
-      time: vacation.time,
-      finished: vacation.finished,
-      notified: vacation.notified,
-    }));
-    return vacation;
   }
 }
 
