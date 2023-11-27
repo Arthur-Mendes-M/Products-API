@@ -3,25 +3,26 @@ import { DB } from "../models/Database.js";
 
 const router = express.Router();
 
-router.get("/cadastro", (req, res) => {
-  res.render("create");
+router.get("/", async (req, res) => {
+  const vacations = await DB.listVacations();
+
+  res.status(200).json(vacations);
 });
 
-router.post("/create", async (req, res) => {
-  const { name, email, description, cpf, date, time } = req.body;
+router.post("/", async (req, res) => {
+  const vacation = req.body;
 
-  try {
-    await DB.createVacation(name, email, description, cpf, date, time);
-    res.redirect("/");
-  } catch (err) {
-    console.error(err);
-    res.send("Ocorreu uma falha!");
-  }
+  await DB.registerVacation(vacation);
+
+  res.status(200).send();
 });
 
-router.get("/getcalendar", async (req, res) => {
-  const vacations = await DB.getAllVacations(false);
-  res.json(vacations);
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  await DB.deleteVacation(id);
+
+  res.status(201).json({ message: "Registro removido com sucesso" });
 });
 
 export default router;
