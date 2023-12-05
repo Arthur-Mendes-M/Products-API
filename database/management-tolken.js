@@ -2,17 +2,17 @@
 
 // sql`
 //   CREATE TABLE IF NOT EXISTS tolken (
-//     tolkenNumber INTEGER
+//     tolkennumber INTEGER
 //   )
 // `.then(() => console.log("Table has been created"));
 
 // sql` INSERT INTO tolken (
-//   tolkenNumber
+//   tolkennumber
 //   ) VALUES (
 //     123456
 //     );
-// `.then(() => console.log("Tolken has been generated"));
+// `.then(() => console.log("Token has been generated"));
 
 // sql`
 //     DROP TABLE tolken
-// `.then(() => console.log('Tolken table has been deleted'))
+// `.then(() => console.log('Token table has been deleted'))
