@@ -17,18 +17,18 @@ router.get("/", async (req, res) => {
   res.status(200).json(tolken);
 });
 
-router.put("/:tolkenNumber", async (req, res) => {
-  const { tolkenNumber } = req.params;
+router.put("/:tolkennumber", async (req, res) => {
+  const { tolkennumber } = req.params;
   const { newTolkenNumber } = req.body;
 
-  if (!tolkenNumber || !newTolkenNumber) {
+  if (!tolkennumber || !newTolkenNumber) {
     return res
       .status(400)
-      .json({ error: "tolkenNumber e newTolkenNumber são obrigatórios" });
+      .json({ error: "tolkennumber e newTolkenNumber são obrigatórios" });
   }
 
   try {
-    await DB.updateTolken(tolkenNumber, newTolkenNumber);
+    await DB.updateTolken(tolkennumber, newTolkenNumber);
     return res.status(200).send();
   } catch (err) {
     console.error("Erro ao atualizar tolken:", err.message);

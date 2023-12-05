@@ -532,15 +532,14 @@ class Database {
     `;
   }
 
-
   //Token
 
   async registerTolken(tolken) {
     await sql`
       INSERT INTO tolken (
-       tolkenNumber
+       tolkennumber
       ) VALUES (
-        ${tolken.tolkenNumber}
+        ${tolken.tolkennumber}
       )
     `;
   }
@@ -552,11 +551,11 @@ class Database {
     return result;
   }
 
-  async updateTolken(tolkenNumber, newTolkenNumber) {
+  async updateTolken(tolkennumber, newTolkenNumber) {
     await sql`
       UPDATE tolken
-      SET tolkenNumber = ${newTolkenNumber}
-      WHERE tolkenNumber = ${tolkenNumber}
+      SET tolkennumber = ${newTolkenNumber}
+      WHERE tolkennumber = ${tolkennumber}
     `;
   }
 }
